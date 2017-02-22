@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BMS.Model;
+using BMS.Service;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -10,10 +12,23 @@ namespace BMS.WebApi.Api.v1
     [RoutePrefix("api/v1/account")]
     public class AccountController : ApiController
     {
-        [HttpGet,Route("test")]
-        public string test(string a)
+        [HttpPost,Route("login"),AllowAnonymous]
+        public IHttpActionResult test(LoginModel loginModel)
         {
-            return a;
+            AccountService accountService = new AccountService();
+            try
+            {
+                return Ok(accountService.Login(loginModel));
+            }
+            catch (Exception e)
+            {
+                //this.ModelState.AddModelError(e.Message, e.ToString());
+                //HttpError httpError = new HttpError(ModelState, true);
+                //httpError.Message = "Internal Server Error";
+                //throw new HttpResponseException(this.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, httpError));
+                throw new Exception(e.Message);
+            }
+            
         }
     }
 }

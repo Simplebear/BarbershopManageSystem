@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace BMS.Model
 {
-    public class Class1
+    public class LoginModel
     {
+        public string Account { get; set; }
+        public string Password { get; set; }
     }
 }
