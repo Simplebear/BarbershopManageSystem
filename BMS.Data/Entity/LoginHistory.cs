@@ -5,30 +5,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BMS.Data
+namespace BMS.Data.Entity
 {
-    public class User
+    /// <summary>
+    /// 登录历史
+    /// </summary>
+    public class LoginHistory
     {
         /// <summary>
         /// 主键Id
         /// </summary>
-        [Key, Required]
+        [Key,Required]
         public int Id { get; set; }
 
         /// <summary>
-        /// 姓名
+        /// 用户
         /// </summary>
-        public string Name { get; set; }
+        public int UserId { get; set; }
 
         /// <summary>
-        /// 账号
+        /// 登陆时间
         /// </summary>
-        public string Account { get; set; }
-
-        /// <summary>
-        /// 密码
-        /// </summary>
-        public string Password { get; set; }
-
+        public DateTime LoginTime { get; set; }
     }
 }
