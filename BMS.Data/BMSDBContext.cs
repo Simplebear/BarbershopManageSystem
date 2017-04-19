@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BMS.Data.Entity;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BMS.Data
 {
-   // [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
+    [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class BMSDBContext: DbContext, IDisposable
     {
         public BMSDBContext():base("DefaultConnection")
@@ -46,5 +47,10 @@ namespace BMS.Data
         }
 
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Announcement> BarberShopInfo { get; set; }
+        public virtual DbSet<LoginHistory> LoginHistory { get; set; }
+        public virtual DbSet<Role> Role { get; set; }
+        public virtual DbSet<Share> Share { get; set; }
+        public virtual DbSet<UserRole> UserRole { get; set; }
     }
 }

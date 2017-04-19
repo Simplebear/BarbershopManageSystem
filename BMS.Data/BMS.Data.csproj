@@ -59,8 +59,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BMSDBContext.cs" />
-    <Compile Include="Entity\BarberShopInfo.cs" />
+    <Compile Include="Entity\Announcement.cs" />
     <Compile Include="Entity\LoginHistory.cs" />
+    <Compile Include="Entity\Order.cs" />
+    <Compile Include="Entity\OrderPackage.cs" />
+    <Compile Include="Entity\Package.cs" />
+    <Compile Include="Entity\Schedule.cs" />
     <Compile Include="Entity\Share.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
