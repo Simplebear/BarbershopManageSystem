@@ -52,5 +52,9 @@ namespace BMS.Data
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Share> Share { get; set; }
         public virtual DbSet<UserRole> UserRole { get; set; }
+        public virtual DbSet<Announcement> Announcement { get; set; }
+        public virtual DbSet<Order> Order { get; set; }
+        public virtual DbSet<OrderPackage> OrderPackage { get; set; }
+        public virtual DbSet<Package> Package { get; set; }
     }
 }
