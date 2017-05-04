@@ -12,24 +12,14 @@ namespace BMS.Data
     [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class BMSDBContext: DbContext, IDisposable
     {
-        public BMSDBContext():base("DefaultConnection")
+        public BMSDBContext(string nameOrConnectionString) : base(nameOrConnectionString)
         {
-            ConfigureDbContext();
+            Database.SetInitializer<BMSDBContext>(null);
+            //ConfigureDbContext();
         }
-        public static BMSDBContext Create()
+        public BMSDBContext():base("name = DefaultConnection")
         {
-            return new BMSDBContext();
-        }
-        public virtual void Commit()
-        {
-            base.SaveChanges();
-        }
-        private void ConfigureDbContext()
-        {
-            this.Configuration.AutoDetectChangesEnabled = false;
-            this.Configuration.UseDatabaseNullSemantics = true;
-            this.Configuration.ProxyCreationEnabled = false;
-            this.Configuration.LazyLoadingEnabled = false;
+            //ConfigureDbContext();
         }
         /// <summary>
         /// 创建对象映射到数据库
@@ -47,7 +37,6 @@ namespace BMS.Data
         }
 
         public virtual DbSet<User> User { get; set; }
-        public virtual DbSet<Announcement> BarberShopInfo { get; set; }
         public virtual DbSet<LoginHistory> LoginHistory { get; set; }
         public virtual DbSet<Role> Role { get; set; }
         public virtual DbSet<Share> Share { get; set; }

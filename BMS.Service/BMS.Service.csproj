@@ -43,7 +43,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountService.cs" />
+    <Compile Include="AnnouncementService.cs" />
+    <Compile Include="OrderService.cs" />
+    <Compile Include="PackageService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BMS.Data\BMS.Data.csproj">
