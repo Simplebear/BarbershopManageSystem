@@ -9,18 +9,27 @@ using System.Threading.Tasks;
 
 namespace BMS.Data
 {
-    [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
+    //[DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class BMSDBContext: DbContext, IDisposable
     {
-        public BMSDBContext(string nameOrConnectionString) : base(nameOrConnectionString)
+        public BMSDBContext() : base("DefaultConnection")
         {
             Database.SetInitializer<BMSDBContext>(null);
-            //ConfigureDbContext();
+            ConfigureDbContext();
         }
-        public BMSDBContext():base("name = DefaultConnection")
+        static BMSDBContext()
         {
-            //ConfigureDbContext();
+            Database.SetInitializer<BMSDBContext>(null);
+
         }
+        private void ConfigureDbContext()
+        {
+            this.Configuration.AutoDetectChangesEnabled = false;
+            this.Configuration.UseDatabaseNullSemantics = true;
+            this.Configuration.ProxyCreationEnabled = false;
+            this.Configuration.LazyLoadingEnabled = false;
+        }
+
         /// <summary>
         /// 创建对象映射到数据库
         /// </summary>

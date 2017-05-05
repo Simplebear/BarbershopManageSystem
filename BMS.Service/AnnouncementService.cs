@@ -13,34 +13,34 @@ namespace BMS.Service
     public class AnnouncementService
     {
         BMSDBContext Db = null;
-        public AnnouncementService()
-        {
-            Db = new BMSDBContext("name = DefaultConnection");
-        }
 
         /// <summary>
-        /// 获取全部公告列表
+        /// 获取全部公告列表(首页)
         /// </summary>
         /// <returns></returns>
         public List<AnnouncementModel> GetAll()
         {
-            var results = new List<AnnouncementModel>();
-            AnnouncementModel model = null;
-            var entities = Db.Announcement.Where(o => o.IsEnable == true).ToList();
-            if (entities!=null)
+            using (Db = new BMSDBContext())
             {
-                foreach (var entity in entities)
+                var results = new List<AnnouncementModel>();
+                AnnouncementModel model = null;
+                var entities = Db.Announcement.Where(o => o.IsEnable == true).ToList();
+                if (entities != null)
                 {
-                    model = new AnnouncementModel();
-                    model.Id = entity.Id;
-                    model.Content = entity.Content;
-                    model.Title = entity.Title;
-                    model.CreatedBy = entity.CreatedBy;
-                    model.CreatedOn = entity.CreatedOn;
-                    results.Add(model);
+                    foreach (var entity in entities)
+                    {
+                        model = new AnnouncementModel();
+                        model.Id = entity.Id;
+                        model.Content = entity.Content;
+                        model.Title = entity.Title;
+                        model.CreatedBy = entity.CreatedBy;
+                        model.CreatedOn = entity.CreatedOn;
+                        results.Add(model);
+                    }
                 }
-            }           
-            return results;
+                return results;
+            }
+                      
         }
 
         /// <summary>
@@ -50,15 +50,18 @@ namespace BMS.Service
         /// <returns></returns>
         public AnnouncementModel Get(int id)
         {
-            AnnouncementModel model = null;
-            var entity = Db.Announcement.Where(o => o.Id == id).FirstOrDefault();
-            model = new AnnouncementModel();
-            model.Id = entity.Id;
-            model.Content = entity.Content;
-            model.Title = entity.Title;
-            model.CreatedBy = entity.CreatedBy;
-            model.CreatedOn = entity.CreatedOn;
-            return model;
+            using (Db = new BMSDBContext())
+            {
+                AnnouncementModel model = null;
+                var entity = Db.Announcement.Where(o => o.Id == id).FirstOrDefault();
+                model = new AnnouncementModel();
+                model.Id = entity.Id;
+                model.Content = entity.Content;
+                model.Title = entity.Title;
+                model.CreatedBy = entity.CreatedBy;
+                model.CreatedOn = entity.CreatedOn;
+                return model;
+            }            
         }
 
         /// <summary>
@@ -68,18 +71,21 @@ namespace BMS.Service
         /// <returns></returns>
         public bool Delete(int id)
         {
-            AnnouncementModel model = null;
-            var entity = Db.Announcement.Where(o => o.Id == id).FirstOrDefault();
-            if (entity!=null)
+            using (Db = new BMSDBContext())
             {
-                Db.Announcement.Remove(entity);
-            }
-            var count = Db.SaveChanges();
-            if (count==0)
-            {
-                return false;
-            }
-            return true;
+                AnnouncementModel model = null;
+                var entity = Db.Announcement.Where(o => o.Id == id).FirstOrDefault();
+                if (entity != null)
+                {
+                    Db.Announcement.Remove(entity);
+                }
+                var count = Db.SaveChanges();
+                if (count == 0)
+                {
+                    return false;
+                }
+                return true;
+            }         
         }
 
         /// <summary>
@@ -89,17 +95,20 @@ namespace BMS.Service
         /// <returns></returns>
         public AnnouncementModel Add(AnnouncementModel model)
         {
-            Announcement entity = null;
-            entity = new Announcement();
-            entity.Id = model.Id;
-            entity.Content = model.Content;
-            entity.Title = model.Title;
-            entity.CreatedBy = model.CreatedBy;
-            entity.CreatedOn = model.CreatedOn;
-            entity.IsEnable = true;
-            Db.Announcement.Add(entity);
-            Db.SaveChanges();
-            return model;
+            using (Db = new BMSDBContext())
+            {
+                Announcement entity = null;
+                entity = new Announcement();
+                entity.Id = model.Id;
+                entity.Content = model.Content;
+                entity.Title = model.Title;
+                entity.CreatedBy = model.CreatedBy;
+                entity.CreatedOn = model.CreatedOn;
+                entity.IsEnable = true;
+                Db.Announcement.Add(entity);
+                Db.SaveChanges();
+                return model;
+            }
         }
 
         /// <summary>
@@ -109,17 +118,20 @@ namespace BMS.Service
         /// <returns></returns>
         public AnnouncementModel Update(AnnouncementModel model)
         {
-            Announcement entity = null;
-            entity = new Announcement();
-            entity.Id = model.Id;
-            entity.Content = model.Content;
-            entity.Title = model.Title;
-            entity.CreatedBy = model.CreatedBy;
-            entity.CreatedOn = model.CreatedOn;
-            entity.IsEnable = true;
-            Db.Entry(entity).State = EntityState.Modified;
-            Db.SaveChanges();
-            return model;
+            using (Db = new BMSDBContext())
+            {
+                Announcement entity = null;
+                entity = new Announcement();
+                entity.Id = model.Id;
+                entity.Content = model.Content;
+                entity.Title = model.Title;
+                entity.CreatedBy = model.CreatedBy;
+                entity.CreatedOn = model.CreatedOn;
+                entity.IsEnable = true;
+                Db.Entry(entity).State = EntityState.Modified;
+                Db.SaveChanges();
+                return model;
+            }
         }
     }
 }

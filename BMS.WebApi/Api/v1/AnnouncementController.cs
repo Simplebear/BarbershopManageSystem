@@ -17,7 +17,7 @@ namespace BMS.WebApi.Api.v1
         {
             accountService = new AnnouncementService();
         }
-        [HttpPost, Route("all"), AllowAnonymous]
+        [HttpGet, Route("all"), AllowAnonymous]
         public IHttpActionResult GetAll()
         {
             try
@@ -26,10 +26,6 @@ namespace BMS.WebApi.Api.v1
             }
             catch (Exception e)
             {
-                //this.ModelState.AddModelError(e.Message, e.ToString());
-                //HttpError httpError = new HttpError(ModelState, true);
-                //httpError.Message = "Internal Server Error";
-                //throw new HttpResponseException(this.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, httpError));
                 throw new Exception(e.Message);
             }
 
@@ -43,13 +39,44 @@ namespace BMS.WebApi.Api.v1
             }
             catch (Exception e)
             {
-                //this.ModelState.AddModelError(e.Message, e.ToString());
-                //HttpError httpError = new HttpError(ModelState, true);
-                //httpError.Message = "Internal Server Error";
-                //throw new HttpResponseException(this.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, httpError));
                 throw new Exception(e.Message);
             }
-
+        }
+        [HttpDelete, Route(""), AllowAnonymous]
+        public IHttpActionResult Delete(int id)
+        {
+            try
+            {
+                return Ok(accountService.Delete(id));
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        [HttpPut, Route(""), AllowAnonymous]
+        public IHttpActionResult Put(AnnouncementModel model)
+        {
+            try
+            {
+                return Ok(accountService.Update(model));
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        [HttpGet, Route(""), AllowAnonymous]
+        public IHttpActionResult Get(int id)
+        {
+            try
+            {
+                return Ok(accountService.Get(id));
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }
