@@ -1,22 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BMS.Data.Entity
+namespace BMS.Model
 {
-    /// <summary>
-    /// 分享表
-    /// </summary>
-    public class Share
+    public class ShareModel
     {
         /// <summary>
-        /// 主键
+        ///  主键Id
         /// </summary>
-        [Key,Required]
-        public  int Id { get; set; }
+        public int Id { get; set; }
 
         /// <summary>
         /// 分享内容
@@ -37,10 +32,5 @@ namespace BMS.Data.Entity
         /// 创建时间
         /// </summary>
         public DateTime CreatedOn { get; set; }
-
-        /// <summary>
-        /// 是否删除
-        /// </summary>
-        public string IsDeleted { get; set; }
     }
 }

@@ -22,10 +22,6 @@ namespace BMS.WebApi.Api.v1
             }
             catch (Exception e)
             {
-                //this.ModelState.AddModelError(e.Message, e.ToString());
-                //HttpError httpError = new HttpError(ModelState, true);
-                //httpError.Message = "Internal Server Error";
-                //throw new HttpResponseException(this.Request.CreateErrorResponse(HttpStatusCode.InternalServerError, httpError));
                 throw new Exception(e.Message);
             }
             
