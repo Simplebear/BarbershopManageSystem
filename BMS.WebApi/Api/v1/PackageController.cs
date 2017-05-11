@@ -7,8 +7,11 @@ using System.Web.Http;
 
 namespace BMS.WebApi.Api.v1
 {
-    [RoutePrefix("api/v1/order")]
-    public class OrderController : ApiController
+    /// <summary>
+    ///  套餐
+    /// </summary>
+    [RoutePrefix("api/v1/package")]
+    public class PackageController : ApiController
     {
     }
 }

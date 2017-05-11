@@ -10,6 +10,9 @@ using System.Web.Http.Description;
 
 namespace BMS.WebApi.Api.v1
 {
+    /// <summary>
+    /// 分享
+    /// </summary>
     [RoutePrefix("api/v1/share")]
     public class ShareController : ApiController
     {

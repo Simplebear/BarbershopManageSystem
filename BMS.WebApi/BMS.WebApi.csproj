@@ -229,6 +229,7 @@
     <Compile Include="Api\v1\AccountController.cs" />
     <Compile Include="Api\v1\AnnouncementController.cs" />
     <Compile Include="Api\v1\OrderController.cs" />
+    <Compile Include="Api\v1\PackageController.cs" />
     <Compile Include="Api\v1\ShareController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />

@@ -26,5 +26,20 @@ namespace BMS.WebApi.Api.v1
             }
             
         }
+        [HttpPost, Route("register"), AllowAnonymous]
+        public IHttpActionResult Register(RegisterModel registerModel)
+        {
+            AccountService accountService = new AccountService();
+            try
+            {
+                return Ok(accountService.Register(registerModel));
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+        }
+
     }
 }

@@ -24,9 +24,14 @@ namespace BMS.Data
         public string Name { get; set; }
 
         /// <summary>
-        /// 账号
+        /// 手机号
         /// </summary>
-        public string Account { get; set; }
+        public string PhoneNumber { get; set; }
+
+        /// <summary>
+        /// 手机号
+        /// </summary>
+        public string Email { get; set; }
 
         /// <summary>
         /// 密码
