@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BMS.Service
 {
-    class OrderService
+    public class OrderService
     {
     }
 }
