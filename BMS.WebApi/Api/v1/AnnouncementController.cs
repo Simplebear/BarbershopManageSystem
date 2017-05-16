@@ -9,6 +9,9 @@ using System.Web.Http;
 
 namespace BMS.WebApi.Api.v1
 {
+    /// <summary>
+    /// 公告
+    /// </summary>
     [RoutePrefix("api/v1/announcement")]
     public class AnnouncementController : ApiController
     {

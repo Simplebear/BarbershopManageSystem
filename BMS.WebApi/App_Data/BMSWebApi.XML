@@ -4,6 +4,28 @@
         <name>BMS.WebApi</name>
     </assembly>
     <members>
+        <member name="T:BMS.WebApi.Api.v1.AccountController">
+            <summary>
+            账户
+            </summary>
+        </member>
+        <member name="M:BMS.WebApi.Api.v1.AccountController.Update(BMS.Model.UserModel)">
+            <summary>
+            更新个人信息
+            </summary>
+            <param name="userModel"></param>
+            <returns></returns>
+        </member>
+        <member name="T:BMS.WebApi.Api.v1.AnnouncementController">
+            <summary>
+            公告
+            </summary>
+        </member>
+        <member name="T:BMS.WebApi.Api.v1.OrderController">
+            <summary>
+            支付
+            </summary>
+        </member>
         <member name="T:BMS.WebApi.Api.v1.PackageController">
             <summary>
              套餐

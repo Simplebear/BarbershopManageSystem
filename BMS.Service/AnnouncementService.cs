@@ -12,7 +12,7 @@ namespace BMS.Service
 {
     public class AnnouncementService
     {
-        BMSDBContext Db = null;
+        protected BMSDBContext Db = null;
 
         /// <summary>
         /// 获取全部公告列表(首页)

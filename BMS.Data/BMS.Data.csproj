@@ -66,6 +66,7 @@
     <Compile Include="Entity\Package.cs" />
     <Compile Include="Entity\Schedule.cs" />
     <Compile Include="Entity\Share.cs" />
+    <Compile Include="Entity\ShopSetting.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entity\Role.cs" />

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BMS.Data
 {
-    //[DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
+    [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class BMSDBContext: DbContext, IDisposable
     {
         public BMSDBContext() : base("DefaultConnection")
@@ -54,5 +54,7 @@ namespace BMS.Data
         public virtual DbSet<Order> Order { get; set; }
         public virtual DbSet<OrderPackage> OrderPackage { get; set; }
         public virtual DbSet<Package> Package { get; set; }
+        public virtual DbSet<ShopSetting> ShopSetting { get; set; }
+        public virtual DbSet<Schedule> Schedule { get; set; }
     }
 }

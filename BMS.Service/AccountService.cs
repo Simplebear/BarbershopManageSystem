@@ -54,5 +54,67 @@ namespace BMS.Service
             }
             return userModel;
         }
+        /// <summary>
+        /// 更新个人信息
+        /// </summary>
+        /// <param name="userModel"></param>
+        /// <returns></returns>
+        public UserModel Update(UserModel userModel)
+        {
+            using (Db = new BMSDBContext())
+            {
+                var user = Db.User.Where(o=>o.Id == userModel.Id).FirstOrDefault();
+                user.Name = userModel.Name;
+                user.PhoneNumber = userModel.PhoneNumber;
+                user.Email = userModel.Email;
+                Db.User.Add(user);
+                //设置角色
+                Db.SaveChanges();
+            }
+            return userModel;
+        }
+        /// <summary>
+        /// 获取个人信息
+        /// </summary>
+        /// <param name="userModel"></param>
+        /// <returns></returns>
+        public UserModel Get(int id)
+        {
+            var userModel = new UserModel();
+            using (Db = new BMSDBContext())
+            {
+                var user = Db.User.Where(o => o.Id == id).FirstOrDefault();
+                userModel.Name = user.Name;
+                userModel.PhoneNumber = user.PhoneNumber;
+                userModel.Email = user.Email;
+                userModel.ImageUrl = user.PhotoUrl;
+                var userRole = Db.UserRole.Where(o => o.UserId == user.Id).FirstOrDefault();
+                var role = Db.Role.Where(o => o.Id == userRole.RoleId).FirstOrDefault();
+                userModel.Role = new IdNameModel() { Id = role.Id, Name = role.Name };
+            }
+            return userModel;
+        }
+
+        public List<UserModel> GetAllBarber()
+        {
+            Db = new BMSDBContext();
+            var userModels = new List<UserModel>();
+            var ids = Db.UserRole.Where(o=>o.RoleId == 2).Select(o=>o.UserId).ToList();
+            foreach (var id in ids)
+            {
+                var user =Db.User.Where(o => o.Id == id).FirstOrDefault();
+                var userModel = new UserModel();
+                userModel.Name = user.Name;
+                userModel.PhoneNumber = user.PhoneNumber;
+                userModel.Email = user.Email;
+                userModel.ImageUrl = user.PhotoUrl;
+                var userRole = Db.UserRole.Where(o => o.UserId == user.Id).FirstOrDefault();
+                var role = Db.Role.Where(o => o.Id == userRole.RoleId).FirstOrDefault();
+                userModel.Role = new IdNameModel() { Id = role.Id, Name = role.Name };
+                userModels.Add(userModel);
+            }
+            return userModels;
+        }
+
     }
 }

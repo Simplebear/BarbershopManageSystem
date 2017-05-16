@@ -20,7 +20,7 @@ namespace BMS.Data.Entity
         /// <summary>
         /// 价格
         /// </summary>
-        public string Price { get; set; }
+        public decimal Price { get; set; }
 
         public int CustomerId { get; set; }
 

@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="AnnouncementModel.cs" />
     <Compile Include="LoginModel.cs" />
+    <Compile Include="OrderModel.cs" />
+    <Compile Include="PackageModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterModel.cs" />
     <Compile Include="IdNameModel.cs" />
