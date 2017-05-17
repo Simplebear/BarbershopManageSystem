@@ -62,21 +62,21 @@ namespace BMS.Service
                     ChanelCode = ""
                 };
                 Db.Order.Add(order);
+                Db.SaveChanges();
                 foreach (var item in orderModel.Packages)
                 {
                     var orderPackage = new OrderPackage()
                     {
-                        OrderId = order.Id,
+                        OrderId = Db.Order.Where(o=>o.OrderNo == orderModel.OrderNo).FirstOrDefault().Id,
                         PackageId = item.Id
                     };
                     Db.OrderPackage.Add(orderPackage);
                 }
                 var shedul = new Schedule()
                 {
-                    Id = 2,
                     CustomerId = orderModel.UserId,
                     BarberId = orderModel.BarberId,
-                    OrderId = order.Id,
+                    OrderId = Db.Order.Where(o => o.OrderNo == orderModel.OrderNo).FirstOrDefault().Id,
                     StartTime = orderModel.StartTime,
                     EndTime = serveEndTime,
                     CreatedOn = DateTime.Now

@@ -99,11 +99,10 @@ namespace BMS.Service
             {
                 Announcement entity = null;
                 entity = new Announcement();
-                entity.Id = model.Id;
                 entity.Content = model.Content;
                 entity.Title = model.Title;
                 entity.CreatedBy = model.CreatedBy;
-                entity.CreatedOn = model.CreatedOn;
+                entity.CreatedOn = DateTime.Now;
                 entity.IsEnable = true;
                 Db.Announcement.Add(entity);
                 Db.SaveChanges();
@@ -122,11 +121,10 @@ namespace BMS.Service
             {
                 Announcement entity = null;
                 entity = new Announcement();
-                entity.Id = model.Id;
                 entity.Content = model.Content;
                 entity.Title = model.Title;
                 entity.CreatedBy = model.CreatedBy;
-                entity.CreatedOn = model.CreatedOn;
+                entity.CreatedOn = DateTime.Now;
                 entity.IsEnable = true;
                 Db.Entry(entity).State = EntityState.Modified;
                 Db.SaveChanges();

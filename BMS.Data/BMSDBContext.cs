@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BMS.Data
 {
-    [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
+    //[DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class BMSDBContext: DbContext, IDisposable
     {
         public BMSDBContext() : base("DefaultConnection")

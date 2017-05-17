@@ -34,23 +34,24 @@ namespace BMS.Service
             using (Db = new BMSDBContext())
             {
                 var user = new User();
-                user.Id = Db.User.Select(o => o.Id).Max() + 1;
                 user.Name = registerModel.Name;
                 user.Password = registerModel.Password;
                 user.PhoneNumber = registerModel.PhoneNumber;
                 user.Email = registerModel.Email;
                 Db.User.Add(user);
+                Db.SaveChanges();
                 var userRole = new UserRole();
-                userRole.UserId = user.Id;
-                userRole.RoleId = 3;
+                userRole.UserId = Db.User.Where(o=>o.PhoneNumber == user.PhoneNumber).FirstOrDefault().Id;
+                userRole.RoleId = 1;
                 userRole.CreatedOn = DateTime.Now;
                 Db.UserRole.Add(userRole);
                 //设置角色
                 Db.SaveChanges();
+                userModel.Id = Db.User.Where(o => o.PhoneNumber == registerModel.PhoneNumber).FirstOrDefault().Id;
                 userModel.Name = registerModel.Name;
                 userModel.PhoneNumber = registerModel.PhoneNumber;
                 userModel.Email = registerModel.Email;
-                userModel.Role = new IdNameModel() { Id = 3, Name = "管理员" };
+                userModel.Role = new IdNameModel() { Id = 1, Name = "顾客" };
             }
             return userModel;
         }

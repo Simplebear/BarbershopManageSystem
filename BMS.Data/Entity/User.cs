@@ -14,9 +14,9 @@ namespace BMS.Data
     public class User
     {
         /// <summary>
-        /// 主键Id
+        /// 主键Id DatabaseGenerated(DatabaseGeneratedOption.Identity)
         /// </summary>
-        [Key, Required,DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key, Required]
         public int Id { get; set; }
 
         /// <summary>
