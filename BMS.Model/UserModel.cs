@@ -18,6 +18,8 @@ namespace BMS.Model
 
         public string ImageUrl { get; set; }
 
+        public string PersonalInfo { get; set; }
+
         public IdNameModel Role { get; set; }
     }
 }

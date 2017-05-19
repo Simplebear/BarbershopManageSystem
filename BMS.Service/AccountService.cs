@@ -109,6 +109,7 @@ namespace BMS.Service
                 userModel.PhoneNumber = user.PhoneNumber;
                 userModel.Email = user.Email;
                 userModel.ImageUrl = user.PhotoUrl;
+                userModel.PersonalInfo = user.PresonalInfo;
                 var userRole = Db.UserRole.Where(o => o.UserId == user.Id).FirstOrDefault();
                 var role = Db.Role.Where(o => o.Id == userRole.RoleId).FirstOrDefault();
                 userModel.Role = new IdNameModel() { Id = role.Id, Name = role.Name };

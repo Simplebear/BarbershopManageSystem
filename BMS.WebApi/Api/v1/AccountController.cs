@@ -76,7 +76,7 @@ namespace BMS.WebApi.Api.v1
             }
 
         }
-        [HttpPost, Route("allBarber"), AllowAnonymous]
+        [HttpGet, Route("allBarber"), AllowAnonymous]
         public IHttpActionResult GetAllBarber()
         {
             AccountService accountService = new AccountService();
