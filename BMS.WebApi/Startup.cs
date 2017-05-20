@@ -23,8 +23,10 @@ namespace BMS.WebApi
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             SwaggerConfig.Register(config);
+            app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
             ConfigureAuth(app);
             app.UseWebApi(config);
+            
 
         }
     }

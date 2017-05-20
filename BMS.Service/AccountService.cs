@@ -105,6 +105,7 @@ namespace BMS.Service
             {
                 var user =Db.User.Where(o => o.Id == id).FirstOrDefault();
                 var userModel = new UserModel();
+                userModel.Id = user.Id;
                 userModel.Name = user.Name;
                 userModel.PhoneNumber = user.PhoneNumber;
                 userModel.Email = user.Email;
