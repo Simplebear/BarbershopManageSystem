@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace BMS.WebApi.Api.v1
 {
@@ -15,10 +16,14 @@ namespace BMS.WebApi.Api.v1
     [RoutePrefix("api/v1/account")]
     public class AccountController : ApiController
     {
-        [HttpPost,Route("login"),AllowAnonymous]
-        public IHttpActionResult test(LoginModel loginModel)
+        AccountService accountService = null;
+        public AccountController()
         {
-            AccountService accountService = new AccountService();
+            accountService = new AccountService();
+        }
+       [HttpPost,Route("login"),AllowAnonymous]
+        public IHttpActionResult Login(LoginModel loginModel)
+        {
             try
             {
                 return Ok(accountService.Login(loginModel));
@@ -29,10 +34,9 @@ namespace BMS.WebApi.Api.v1
             }
             
         }
-        [HttpPost, Route("register"), AllowAnonymous]
+        [HttpPost, Route("register")]
         public IHttpActionResult Register(RegisterModel registerModel)
         {
-            AccountService accountService = new AccountService();
             try
             {
                 return Ok(accountService.Register(registerModel));
@@ -51,7 +55,6 @@ namespace BMS.WebApi.Api.v1
         [HttpPut, Route(""), AllowAnonymous]
         public IHttpActionResult Update(UserModel userModel)
         {
-            AccountService accountService = new AccountService();
             try
             {
                 return Ok(accountService.Update(userModel));
@@ -62,10 +65,14 @@ namespace BMS.WebApi.Api.v1
             }
 
         }
+        /// <summary>
+        /// 获取个人信息
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet, Route(""), AllowAnonymous]
         public IHttpActionResult Get(int id)
         {
-            AccountService accountService = new AccountService();
             try
             {
                 return Ok(accountService.Get(id));
@@ -76,10 +83,13 @@ namespace BMS.WebApi.Api.v1
             }
 
         }
+        /// <summary>
+        /// 获取所有理发师
+        /// </summary>
+        /// <returns></returns>
         [HttpGet, Route("allBarber"), AllowAnonymous]
         public IHttpActionResult GetAllBarber()
         {
-            AccountService accountService = new AccountService();
             try
             {
                 return Ok(accountService.GetAllBarber());
@@ -90,6 +100,40 @@ namespace BMS.WebApi.Api.v1
             }
 
         }
+         /// <summary>
+         /// 新增理发师
+         /// </summary>
+         /// <param name="barber"></param>
+         /// <returns></returns>
+        [HttpPost, Route("barber"), AllowAnonymous]
+        public IHttpActionResult AddBarber(UserModel barber)
+        {
+            try
+            {
+                return Ok(accountService.Add(barber));
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
 
+        /// <summary>
+        /// 分页获取所有用户
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpGet, Route("search"), AllowAnonymous, ResponseType(typeof(ShareModel))]
+        public IHttpActionResult Search(string pageIndex = "1", string pageSize = "10")
+        {
+            try
+            {
+                return Ok(accountService.Search(int.Parse(pageIndex), int.Parse(pageSize)));
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

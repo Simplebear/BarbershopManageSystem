@@ -14,13 +14,16 @@ namespace BMS.Data.Entity
 
         public string Name { get; set; }
 
-        public string Timespan { get; set; }
+        /// <summary>
+        /// 需要时间
+        /// </summary>
+        public int Timespan { get; set; }
 
         public decimal Price { get; set; }
 
         public string Description { get; set; }
 
-        public string CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
         public string IsEnable { get; set; }
 

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace BMS.WebApi.Api.v1
 {
@@ -75,6 +76,19 @@ namespace BMS.WebApi.Api.v1
             try
             {
                 return Ok(accountService.Get(id));
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        [HttpGet, Route("search"), AllowAnonymous, ResponseType(typeof(ShareModel))]
+        public IHttpActionResult Search(string pageIndex = "1", string pageSize = "10")
+        {
+            try
+            {
+                return Ok(accountService.Search(int.Parse(pageIndex), int.Parse(pageSize)));
             }
             catch (Exception e)
             {

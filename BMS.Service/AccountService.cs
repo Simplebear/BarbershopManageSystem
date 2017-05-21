@@ -3,6 +3,7 @@ using BMS.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,16 +32,21 @@ namespace BMS.Service
         public UserModel Register(RegisterModel registerModel)
         {
             UserModel userModel = new UserModel();
+            var userRole = new UserRole();
+            var user = new User();
             using (Db = new BMSDBContext())
             {
-                var user = new User();
+                var validater = Db.User.Where(o => o.PhoneNumber == registerModel.PhoneNumber).FirstOrDefault();
+                if (validater != null)
+                {
+                    throw new Exception("手机号已存在");
+                }              
                 user.Name = registerModel.Name;
                 user.Password = registerModel.Password;
                 user.PhoneNumber = registerModel.PhoneNumber;
                 user.Email = registerModel.Email;
                 Db.User.Add(user);
-                Db.SaveChanges();
-                var userRole = new UserRole();
+                Db.SaveChanges();              
                 userRole.UserId = Db.User.Where(o=>o.PhoneNumber == user.PhoneNumber).FirstOrDefault().Id;
                 userRole.RoleId = 1;
                 userRole.CreatedOn = DateTime.Now;
@@ -55,6 +61,7 @@ namespace BMS.Service
             }
             return userModel;
         }
+
         /// <summary>
         /// 更新个人信息
         /// </summary>
@@ -64,6 +71,11 @@ namespace BMS.Service
         {
             using (Db = new BMSDBContext())
             {
+                var validater = Db.User.Where(o => o.PhoneNumber == userModel.PhoneNumber).FirstOrDefault();
+                if (validater!=null)
+                {
+                    throw new Exception("手机号已存在");
+                }
                 var user = Db.User.Where(o=>o.Id == userModel.Id).FirstOrDefault();
                 user.Name = userModel.Name;
                 user.PhoneNumber = userModel.PhoneNumber;
@@ -74,6 +86,7 @@ namespace BMS.Service
             }
             return userModel;
         }
+
         /// <summary>
         /// 获取个人信息
         /// </summary>
@@ -119,5 +132,61 @@ namespace BMS.Service
             return userModels;
         }
 
+        public UserModel Add(UserModel Barber)
+        {
+            using (Db = new BMSDBContext()) //一次数据库连接
+            {
+                var validater = Db.User.Where(o => o.PhoneNumber == Barber.PhoneNumber).FirstOrDefault();
+                if (validater != null)
+                {
+                    throw new Exception("手机号已存在");
+                }
+                var entity = new User(); //建一条user记录
+                entity.Name = Barber.Name;
+                entity.PhoneNumber = Barber.PhoneNumber;
+                entity.Email = Barber.Email;
+                entity.PresonalInfo = Barber.PersonalInfo;
+                entity.Password = "123456";
+                Db.User.Add(entity);
+                Db.SaveChanges(); //保存
+                var userRole = new UserRole();
+                userRole.UserId = Db.User.Where(o => o.PhoneNumber == Barber.PhoneNumber).FirstOrDefault().Id;
+                userRole.RoleId = 2;
+                Db.UserRole.Add(userRole);
+                Db.SaveChanges();
+                Barber.Id = userRole.UserId;
+            }
+            return Barber;
+        }
+
+        public PagedResult<UserModel> Search(int pageIndex, int pageSize)
+        {
+            Db = new BMSDBContext();
+            var models = new List<UserModel>();
+
+            var userRoles = Db.UserRole.ToList();
+            var roles = Db.Role.ToList();
+            Expression<Func<User, bool>> filter = o => true;
+            var totalRecord = 0;
+            var list = Db.User.Where(filter);
+            totalRecord = list.Count();
+            list = list.OrderByDescending(o => o.Id).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+
+            foreach (var user in list)
+            {
+                var userModel = new UserModel();
+                userModel.Id = user.Id;
+                userModel.Name = user.Name;
+                userModel.PhoneNumber = user.PhoneNumber;
+                userModel.Email = user.Email;
+                userModel.ImageUrl = user.PhotoUrl;
+                userModel.PersonalInfo = user.PresonalInfo;
+                var userRole = userRoles.Where(o => o.UserId == user.Id).FirstOrDefault();
+                var role = roles.Where(o => o.Id == userRole.RoleId).FirstOrDefault();
+                userModel.Role = new IdNameModel() { Id = role.Id, Name = role.Name };
+                models.Add(userModel);
+            }
+            return new PagedResult<UserModel>(pageIndex, pageSize, totalRecord, models);
+        }
     }
 }

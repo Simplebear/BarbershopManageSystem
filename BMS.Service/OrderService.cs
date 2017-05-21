@@ -4,6 +4,7 @@ using BMS.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,7 +25,7 @@ namespace BMS.Service
                 //获取店铺设置
                 var companyInfo = Db.ShopSetting.FirstOrDefault();
                 //1.判断是否在营业时间
-                if (orderModel.StartTime.Hour < companyInfo.StartTime.Hour || orderModel.StartTime.Hour < companyInfo.EndTime.Hour)
+                if (orderModel.StartTime.Hour > companyInfo.StartTime.Hour || orderModel.StartTime.Hour < companyInfo.EndTime.Hour)
                 {
                     throw new Exception("所选时间不在营业时间");
                 }
@@ -33,27 +34,31 @@ namespace BMS.Service
                 var needTime = orderModel.Packages.Sum(o => o.Timespan);
                 //服务结束时间
                 var serveEndTime = orderModel.StartTime.AddMinutes(needTime);
-                var count = (orderModel.StartTime - serveEndTime).Minutes / 30;
+                //判断有多少个半小时
+                var count = (serveEndTime - orderModel.StartTime).Minutes / 30;
                 for (int i = 1; i <= count; i++)
                 {
-                    var start = orderModel.StartTime.AddMinutes(needTime * (i - 1));
-                    var end = orderModel.StartTime.AddMinutes(needTime * i);
-                    var allShedulCounts = Db.Schedule.Where(o => o.StartTime <= orderModel.StartTime && o.EndTime >= end).Count();
+                    //30分钟遍历
+                    var start = orderModel.StartTime.AddMinutes(30 * (i - 1));
+                    var end = orderModel.StartTime.AddMinutes(30 * i);
+                    //判断时间内有多少人
+                    var allShedulCounts = Db.Schedule.Where(o => o.StartTime <= start && o.EndTime >= end).Count();
                     if (allShedulCounts >= companyInfo.MaxServeCount)
                     {
                         throw new Exception(string.Format("{0}-{1}时间段店铺达到最大服务人数", start, end));
                     }
+                    //3.判断理发师时间安排
+                    var shedulCounts = Db.Schedule.Where(o => o.BarberId == orderModel.BarberId && o.StartTime <= start && o.EndTime >= end).Count();
+                    if (shedulCounts > 0)
+                    {
+                        throw new Exception("与理发师时间冲突");
+                    }
                 }
-                //3.判断理发师时间安排
-                var shedulCounts = Db.Schedule.Where(o => o.BarberId == orderModel.BarberId && o.StartTime <= orderModel.StartTime && o.EndTime >= serveEndTime).Count();
-                if (shedulCounts > 0)
-                {
-                    throw new Exception("与理发师时间冲突");
-                }
-                //插入数据
+
                 var order = new Order()
                 {
                     CustomerId = orderModel.UserId,
+                    //随机生成
                     OrderNo = orderModel.OrderNo,
                     CreatedBy = orderModel.UserId,
                     CreatedOn = DateTime.Now,
@@ -67,7 +72,7 @@ namespace BMS.Service
                 {
                     var orderPackage = new OrderPackage()
                     {
-                        OrderId = Db.Order.Where(o=>o.OrderNo == orderModel.OrderNo).FirstOrDefault().Id,
+                        OrderId = Db.Order.Where(o => o.OrderNo == orderModel.OrderNo).FirstOrDefault().Id,
                         PackageId = item.Id
                     };
                     Db.OrderPackage.Add(orderPackage);
@@ -83,11 +88,35 @@ namespace BMS.Service
                 };
                 Db.Schedule.Add(shedul);
             }
-            if (Db.SaveChanges()<1)
+            if (Db.SaveChanges() < 1)
             {
                 throw new Exception("错误");
             }
             return orderModel;
+        }
+
+        public PagedResult<OrderModel> Search(int pageIndex, int pageSize)
+        {
+            Db = new BMSDBContext();
+            OrderModel model = null;
+            List<OrderModel> models = new List<OrderModel>();
+            Expression<Func<Order, bool>> filter = o => true;
+            var totalRecord = 0;
+            var list = Db.Order.Where(filter);
+            totalRecord = list.Count();
+            list = list.OrderByDescending(o => o.CreatedOn).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            var schedule = Db.Schedule.ToList();
+            foreach (var entity in list)
+            {
+                model = new OrderModel();
+                model.Id = entity.Id;
+                model.BarberId = schedule.Where(o=>o.OrderId == entity.Id).FirstOrDefault().BarberId;
+                model.OrderNo = entity.OrderNo;
+                model.StartTime = schedule.Where(o => o.OrderId == entity.Id).FirstOrDefault().StartTime;
+                model.CreatedOn = entity.CreatedOn;
+                models.Add(model);
+            }
+            return new PagedResult<OrderModel>(pageIndex, pageSize, totalRecord, models);
         }
     }
 }

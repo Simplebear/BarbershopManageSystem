@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -130,6 +131,29 @@ namespace BMS.Service
                 Db.SaveChanges();
                 return model;
             }
+        }
+
+        public PagedResult<AnnouncementModel> Search(int pageIndex, int pageSize)
+        {
+            Db = new BMSDBContext();
+            AnnouncementModel model = null;
+            List<AnnouncementModel> models = new List<AnnouncementModel>();
+            Expression<Func<Announcement, bool>> filter = o => true;
+            var totalRecord = 0;
+            var list = Db.Announcement.Where(filter);
+            totalRecord = list.Count();
+            list = list.OrderByDescending(o => o.CreatedOn).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            foreach (var entity in list)
+            {
+                model = new AnnouncementModel();
+                model.Id = entity.Id;
+                model.Content = entity.Content;
+                model.Title = entity.Title;
+                model.CreatedBy = entity.CreatedBy;
+                model.CreatedOn = entity.CreatedOn;
+                models.Add(model);
+            }
+            return new PagedResult<AnnouncementModel>(pageIndex, pageSize, totalRecord, models);
         }
     }
 }

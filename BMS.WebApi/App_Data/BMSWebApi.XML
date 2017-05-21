@@ -16,6 +16,33 @@
             <param name="userModel"></param>
             <returns></returns>
         </member>
+        <member name="M:BMS.WebApi.Api.v1.AccountController.Get(System.Int32)">
+            <summary>
+            获取个人信息
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BMS.WebApi.Api.v1.AccountController.GetAllBarber">
+            <summary>
+            获取所有理发师
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BMS.WebApi.Api.v1.AccountController.AddBarber(BMS.Model.UserModel)">
+            <summary>
+            新增理发师
+            </summary>
+            <param name="barber"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BMS.WebApi.Api.v1.AccountController.Search(System.String,System.String)">
+            <summary>
+            分页获取所有用户
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:BMS.WebApi.Api.v1.AnnouncementController">
             <summary>
             公告
@@ -26,15 +53,107 @@
             支付
             </summary>
         </member>
+        <member name="M:BMS.WebApi.Api.v1.OrderController.Search(System.String,System.String)">
+            <summary>
+            分页获取所有订单
+            </summary>
+            <param name="pageIndex"></param>
+            <param name="pageSize"></param>
+            <returns></returns>
+        </member>
         <member name="T:BMS.WebApi.Api.v1.PackageController">
             <summary>
              套餐
             </summary>
         </member>
+        <member name="M:BMS.WebApi.Api.v1.PackageController.Add(BMS.Model.PackageModel)">
+            <summary>
+            增加套餐
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BMS.WebApi.Api.v1.PackageController.Delete(System.Int32)">
+            <summary>
+            删除套餐
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BMS.WebApi.Api.v1.PackageController.Put(BMS.Model.PackageModel)">
+            <summary>
+            修改套餐
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BMS.WebApi.Api.v1.PackageController.Get(System.Int32)">
+            <summary>
+            获取单个套餐信息
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BMS.WebApi.Api.v1.PackageController.GetAll(System.Int32)">
+            <summary>
+            获取所有套餐
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BMS.WebApi.Api.v1.PackageController.Search(System.String,System.String)">
+            <summary>
+            获取所有套餐
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="T:BMS.WebApi.Api.v1.ShareController">
             <summary>
             分享
             </summary>
+        </member>
+        <member name="M:BMS.WebApi.Api.v1.ShareController.Add(BMS.Model.ShareModel)">
+            <summary>
+            增加分享（顾客）
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BMS.WebApi.Api.v1.ShareController.Delete(System.Int32)">
+            <summary>
+            删除分享（顾客）
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BMS.WebApi.Api.v1.ShareController.Put(BMS.Model.ShareModel)">
+            <summary>
+            修改待定
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BMS.WebApi.Api.v1.ShareController.Get(System.Int32)">
+            <summary>
+            获取分享
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BMS.WebApi.Api.v1.ShareController.GetUserAll(System.Int32)">
+            <summary>
+            获取个人所有分享
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:BMS.WebApi.Api.v1.ShareController.Search(System.String,System.String)">
+            <summary>
+            获取所有套餐
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
         </member>
         <member name="M:BMS.WebApi.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">
             <summary>

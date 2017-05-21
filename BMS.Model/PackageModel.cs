@@ -36,7 +36,7 @@ namespace BMS.Model
         /// <summary>
         /// 创建时间
         /// </summary>
-        public string CreatedOn { get; set; }
+        public DateTime CreatedOn { get; set; }
 
         /// <summary>
         /// 是否处于启用状态

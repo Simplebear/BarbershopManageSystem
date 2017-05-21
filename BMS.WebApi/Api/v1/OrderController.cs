@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace BMS.WebApi.Api.v1
 {
@@ -27,6 +28,24 @@ namespace BMS.WebApi.Api.v1
             try
             {
                 return Ok(orderService.Add(model));
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        /// <summary>
+        /// 分页获取所有订单
+        /// </summary>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        [HttpGet, Route("search"), AllowAnonymous, ResponseType(typeof(ShareModel))]
+        public IHttpActionResult Search(string pageIndex = "1", string pageSize = "10")
+        {
+            try
+            {
+                return Ok(orderService.Search(int.Parse(pageIndex), int.Parse(pageSize)));
             }
             catch (Exception e)
             {

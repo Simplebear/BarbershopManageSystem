@@ -9,6 +9,10 @@ namespace BMS.Model
     public class OrderModel
     {
         /// <summary>
+        /// Id
+        /// </summary>
+        public int Id { get; set; }
+        /// <summary>
         /// 订单号
         /// </summary>
         public string OrderNo { get; set; }
