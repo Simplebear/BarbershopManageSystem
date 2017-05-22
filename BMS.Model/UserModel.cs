@@ -21,5 +21,7 @@ namespace BMS.Model
         public string PersonalInfo { get; set; }
 
         public IdNameModel Role { get; set; }
+
+        public string Token { get; set; }
     }
 }

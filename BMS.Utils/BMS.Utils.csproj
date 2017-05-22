@@ -4,14 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{096C822E-17AF-4938-8D27-0065C2529D49}</ProjectGuid>
+    <ProjectGuid>{AB4755EB-98D4-414E-A242-5F03ECA89AD1}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BMS.Service</RootNamespace>
-    <AssemblyName>BMS.Service</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <RootNamespace>BMS.Utils</RootNamespace>
+    <AssemblyName>BMS.Utils</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,11 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.10.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,30 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AccountService.cs" />
-    <Compile Include="AnnouncementService.cs" />
-    <Compile Include="OrderService.cs" />
-    <Compile Include="PackageService.cs" />
+    <Compile Include="Class1.cs" />
+    <Compile Include="EncryptHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RoleService.cs" />
-    <Compile Include="ShareService.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\BMS.Data\BMS.Data.csproj">
-      <Project>{37d8f50c-2391-41d5-81c6-8eb07643a668}</Project>
-      <Name>BMS.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BMS.Model\BMS.Model.csproj">
-      <Project>{f09d086e-e319-4494-ba3e-7347d7d34f17}</Project>
-      <Name>BMS.Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\BMS.Utils\BMS.Utils.csproj">
-      <Project>{AB4755EB-98D4-414E-A242-5F03ECA89AD1}</Project>
-      <Name>BMS.Utils</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

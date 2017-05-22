@@ -1,5 +1,7 @@
 ﻿using BMS.Data;
 using BMS.Model;
+using BMS.Utils;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +13,7 @@ namespace BMS.Service
 {
     public class AccountService
     {
+        private static readonly string EncryptionKey = "1qqqwww3";
         BMSDBContext Db = null;
         public UserModel Login(LoginModel loginModel)
         {
@@ -26,6 +29,13 @@ namespace BMS.Service
                 var role = Db.Role.Where(o => o.Id == userRole.RoleId).FirstOrDefault();
                 userModel.Role = new IdNameModel() { Id = role.Id, Name = role.Name };
             }
+            var tokenModel = new TokenModel()
+            {
+                UserId = userModel.Id,
+                Name = userModel.Name,
+                Role = userModel.Role.Name
+            };
+            var value = EncryptHelper.EncryptString(JsonConvert.SerializeObject(tokenModel), EncryptionKey);
             return userModel;                        
         }
 

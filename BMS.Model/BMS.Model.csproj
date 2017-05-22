@@ -52,6 +52,7 @@
     <Compile Include="RegisterModel.cs" />
     <Compile Include="IdNameModel.cs" />
     <Compile Include="ShareModel.cs" />
+    <Compile Include="TokenModel.cs" />
     <Compile Include="UserModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

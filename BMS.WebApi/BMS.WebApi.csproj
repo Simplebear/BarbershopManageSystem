@@ -273,6 +273,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="filter\AuthValidater.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -361,6 +362,10 @@
     <ProjectReference Include="..\BMS.Service\BMS.Service.csproj">
       <Project>{096c822e-17af-4938-8d27-0065c2529d49}</Project>
       <Name>BMS.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BMS.Utils\BMS.Utils.csproj">
+      <Project>{AB4755EB-98D4-414E-A242-5F03ECA89AD1}</Project>
+      <Name>BMS.Utils</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
