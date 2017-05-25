@@ -36,6 +36,7 @@ namespace BMS.Service
                         model.Title = entity.Title;
                         model.CreatedBy = entity.CreatedBy;
                         model.CreatedOn = entity.CreatedOn;
+                        model.IsEnable = entity.IsEnable;
                         results.Add(model);
                     }
                 }
@@ -61,6 +62,7 @@ namespace BMS.Service
                 model.Title = entity.Title;
                 model.CreatedBy = entity.CreatedBy;
                 model.CreatedOn = entity.CreatedOn;
+                model.IsEnable = entity.IsEnable;
                 return model;
             }            
         }
@@ -104,7 +106,7 @@ namespace BMS.Service
                 entity.Title = model.Title;
                 entity.CreatedBy = model.CreatedBy;
                 entity.CreatedOn = DateTime.Now;
-                entity.IsEnable = true;
+                entity.IsEnable = model.IsEnable;
                 Db.Announcement.Add(entity);
                 Db.SaveChanges();
                 return model;
@@ -126,7 +128,7 @@ namespace BMS.Service
                 entity.Title = model.Title;
                 entity.CreatedBy = model.CreatedBy;
                 entity.CreatedOn = DateTime.Now;
-                entity.IsEnable = true;
+                entity.IsEnable = model.IsEnable;
                 Db.Entry(entity).State = EntityState.Modified;
                 Db.SaveChanges();
                 return model;
@@ -151,6 +153,7 @@ namespace BMS.Service
                 model.Title = entity.Title;
                 model.CreatedBy = entity.CreatedBy;
                 model.CreatedOn = entity.CreatedOn;
+                model.IsEnable = entity.IsEnable;
                 models.Add(model);
             }
             return new PagedResult<AnnouncementModel>(pageIndex, pageSize, totalRecord, models);

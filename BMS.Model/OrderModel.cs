@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BMS.Utils.Enum;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -40,5 +41,10 @@ namespace BMS.Model
         /// 订单创建人
         /// </summary>
         public DateTime CreatedOn { get; set; }
+
+        /// <summary>
+        /// 订单创建人
+        /// </summary>
+        public Chanel Chanel { get; set; }
     }
 }

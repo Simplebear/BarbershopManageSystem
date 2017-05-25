@@ -1,6 +1,8 @@
 ﻿using BMS.Data;
 using BMS.Data.Entity;
 using BMS.Model;
+using BMS.Utils;
+using BMS.Utils.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,12 +61,12 @@ namespace BMS.Service
                 {
                     CustomerId = orderModel.UserId,
                     //随机生成
-                    OrderNo = orderModel.OrderNo,
+                    OrderNo = CommonHelper.GetRandomString(6),
                     CreatedBy = orderModel.UserId,
                     CreatedOn = DateTime.Now,
-                    OrderStatus = "",
+                    OrderStatus = OrderStatus.Ordered.ToString(),
                     Price = orderModel.Packages.Sum(o => o.Price),
-                    ChanelCode = ""
+                    ChanelCode = orderModel.Chanel.ToString()
                 };
                 Db.Order.Add(order);
                 Db.SaveChanges();

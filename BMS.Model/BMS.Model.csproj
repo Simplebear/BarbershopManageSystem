@@ -55,6 +55,12 @@
     <Compile Include="TokenModel.cs" />
     <Compile Include="UserModel.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BMS.Utils\BMS.Utils.csproj">
+      <Project>{AB4755EB-98D4-414E-A242-5F03ECA89AD1}</Project>
+      <Name>BMS.Utils</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

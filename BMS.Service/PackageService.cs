@@ -27,6 +27,7 @@ namespace BMS.Service
                 model.CreatedOn = entity.CreatedOn;
                 model.IsDeleted = entity.IsDeleted;
                 model.IsEnable = entity.IsEnable;
+                model.Description = entity.Description;
             }
             return model;
         }
@@ -94,6 +95,7 @@ namespace BMS.Service
                     model.CreatedOn = item.CreatedOn;
                     model.IsDeleted = item.IsDeleted;
                     model.IsEnable = item.IsEnable;
+                    model.Description = item.Description;
                     models.Add(model);
                 }
             }
@@ -125,6 +127,7 @@ namespace BMS.Service
                 model.CreatedOn = item.CreatedOn;
                 model.IsDeleted = item.IsDeleted;
                 model.IsEnable = item.IsEnable;
+                model.Description = item.Description;
                 models.Add(model);
             }
             return new PagedResult<PackageModel>(pageIndex, pageSize, totalRecord, models);

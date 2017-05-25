@@ -26,7 +26,7 @@ namespace BMS.WebApi.Api.v1
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPost, Route(""), AllowAnonymous, ResponseType(typeof(ShareModel))]
+        [HttpPost, Route(""), AllowAnonymous]
         public IHttpActionResult Add(PackageModel model)
         {
             try
@@ -60,7 +60,7 @@ namespace BMS.WebApi.Api.v1
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPut, Route(""), AllowAnonymous, ResponseType(typeof(ShareModel))]
+        [HttpPut, Route(""), AllowAnonymous]
         public IHttpActionResult Put(PackageModel model)
         {
             try
@@ -77,7 +77,7 @@ namespace BMS.WebApi.Api.v1
          /// </summary>
          /// <param name="id"></param>
          /// <returns></returns>
-        [HttpGet, Route(""), AllowAnonymous, ResponseType(typeof(ShareModel))]
+        [HttpGet, Route(""), AllowAnonymous]
         public IHttpActionResult Get(int id)
         {
             try
@@ -94,8 +94,8 @@ namespace BMS.WebApi.Api.v1
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet, Route("all"), AllowAnonymous, ResponseType(typeof(ShareModel))]
-        public IHttpActionResult GetAll(int pa)
+        [HttpGet, Route("all"), AllowAnonymous]
+        public IHttpActionResult GetAll()
         {
             try
             {
@@ -112,7 +112,7 @@ namespace BMS.WebApi.Api.v1
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet, Route("search"), AllowAnonymous, ResponseType(typeof(ShareModel))]
+        [HttpGet, Route("search"), AllowAnonymous]
         public IHttpActionResult Search(string pageIndex = "1", string pageSize = "10")
         {
             try
