@@ -120,5 +120,23 @@ namespace BMS.Service
             }
             return new PagedResult<OrderModel>(pageIndex, pageSize, totalRecord, models);
         }
+
+        public OrderModel UpdateStatus(OrderModel model)
+        {
+            if (model == null)
+            {
+                throw new Exception("Model为空");
+            }
+            using (Db = new BMSDBContext())
+            {
+                var entity = Db.Order.Where(o => o.Id == model.Id).FirstOrDefault();
+                if (entity != null)
+                {
+                    entity.OrderStatus = model.OrderStatus;
+                }
+                Db.SaveChanges();
+            }
+            return model;
+        }
     }
 }

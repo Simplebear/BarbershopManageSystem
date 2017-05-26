@@ -40,12 +40,30 @@ namespace BMS.WebApi.Api.v1
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        [HttpGet, Route("search"), AllowAnonymous, ResponseType(typeof(ShareModel))]
+        [HttpGet, Route("search"), AllowAnonymous]
         public IHttpActionResult Search(string pageIndex = "1", string pageSize = "10")
         {
             try
             {
                 return Ok(orderService.Search(int.Parse(pageIndex), int.Parse(pageSize)));
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// 修改订单状态
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns></returns>
+        [HttpPut, Route(""), AllowAnonymous]
+        public IHttpActionResult Put(OrderModel model)
+        {
+            try
+            {
+                return Ok(orderService.UpdateStatus(model));
             }
             catch (Exception e)
             {

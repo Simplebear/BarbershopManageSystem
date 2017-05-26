@@ -46,5 +46,10 @@ namespace BMS.Model
         /// 订单创建人
         /// </summary>
         public Chanel Chanel { get; set; }
+
+        /// <summary>
+        /// 订单状态
+        /// </summary>
+        public string OrderStatus { set; get; }
     }
 }

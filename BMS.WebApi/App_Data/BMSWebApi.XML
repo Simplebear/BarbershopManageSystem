@@ -61,6 +61,13 @@
             <param name="pageSize"></param>
             <returns></returns>
         </member>
+        <member name="M:BMS.WebApi.Api.v1.OrderController.Put(BMS.Model.OrderModel)">
+            <summary>
+            修改订单状态
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="T:BMS.WebApi.Api.v1.PackageController">
             <summary>
              套餐
@@ -94,7 +101,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:BMS.WebApi.Api.v1.PackageController.GetAll(System.Int32)">
+        <member name="M:BMS.WebApi.Api.v1.PackageController.GetAll">
             <summary>
             获取所有套餐
             </summary>
