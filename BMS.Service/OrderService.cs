@@ -27,17 +27,18 @@ namespace BMS.Service
                 //获取店铺设置
                 var companyInfo = Db.ShopSetting.FirstOrDefault();
                 //1.判断是否在营业时间
-                if (orderModel.StartTime.Hour > companyInfo.StartTime.Hour || orderModel.StartTime.Hour < companyInfo.EndTime.Hour)
+                if (orderModel.StartTime.Hour < companyInfo.StartTime.Hour || orderModel.StartTime.Hour > companyInfo.EndTime.Hour)
                 {
                     throw new Exception("所选时间不在营业时间");
                 }
                 //2.判断是否超过同时服务人数
                 //服务所需分钟数
-                var needTime = orderModel.Packages.Sum(o => o.Timespan);
+                var pacId = Convert.ToInt32(orderModel.Packages[0].Id); 
+                var needTime = Db.Package.FirstOrDefault(o=>o.Id == pacId).Timespan;
                 //服务结束时间
                 var serveEndTime = orderModel.StartTime.AddMinutes(needTime);
                 //判断有多少个半小时
-                var count = (serveEndTime - orderModel.StartTime).Minutes / 30;
+                var count = (serveEndTime - orderModel.StartTime).TotalMinutes / 30;
                 for (int i = 1; i <= count; i++)
                 {
                     //30分钟遍历
@@ -68,6 +69,7 @@ namespace BMS.Service
                     Price = orderModel.Packages.Sum(o => o.Price),
                     ChanelCode = orderModel.Chanel.ToString()
                 };
+                orderModel.OrderNo = order.OrderNo;
                 Db.Order.Add(order);
                 Db.SaveChanges();
                 foreach (var item in orderModel.Packages)
@@ -89,11 +91,11 @@ namespace BMS.Service
                     CreatedOn = DateTime.Now
                 };
                 Db.Schedule.Add(shedul);
-            }
-            if (Db.SaveChanges() < 1)
-            {
-                throw new Exception("错误");
-            }
+                if (Db.SaveChanges() < 1)
+                {
+                    throw new Exception("错误");
+                }
+            }           
             return orderModel;
         }
 
