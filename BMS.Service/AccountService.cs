@@ -37,6 +37,7 @@ namespace BMS.Service
                 Role = userModel.Role.Name
             };
             var value = EncryptHelper.EncryptString(JsonConvert.SerializeObject(tokenModel), EncryptionKey);
+            userModel.Token = value;
             return userModel;                        
         }
 

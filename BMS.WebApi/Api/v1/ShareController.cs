@@ -124,7 +124,7 @@ namespace BMS.WebApi.Api.v1
             }
         }
 
-        [HttpPost, Route(""), AllowAnonymous, ResponseType(typeof(ShareModel))]
+        [HttpPost, Route("upload"), AllowAnonymous, ResponseType(typeof(ShareModel))]
         public IHttpActionResult Upload(int? id)
         {
             try

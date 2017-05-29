@@ -66,6 +66,7 @@ namespace BMS.Service
                 entity.ImageUrl = model.ImageUrl;
                 entity.Content = model.Content;
                 entity.CreatedOn = DateTime.Now.Date;
+                entity.IsDeleted = "N";
                 Db.Share.Add(entity);
                 Db.SaveChanges();
             }

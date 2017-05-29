@@ -112,13 +112,14 @@ namespace BMS.Service
             var schedule = Db.Schedule.ToList();
             var packages = Db.Package.ToList();
             var orderPackage = Db.OrderPackage.ToList();
+            var users = Db.User.ToList();
             foreach (var entity in list)
             {
                 model = new OrderModel();
                 model.Id = entity.Id;
                 model.BarberId = schedule.Where(o=>o.OrderId == entity.Id).FirstOrDefault().BarberId;
                 model.UserId = Convert.ToInt32(schedule.Where(o => o.OrderId == entity.Id).FirstOrDefault().CustomerId);
-                //model.UserName = Db.User.Where(o => o.Id == model.UserId).FirstOrDefault().Name;
+                model.UserName = users.Where(o => o.Id == model.UserId).FirstOrDefault().Name;
                 model.OrderNo = entity.OrderNo;
                 model.StartTime = schedule.Where(o => o.OrderId == entity.Id).FirstOrDefault().StartTime;
                 model.CreatedOn = entity.CreatedOn;
@@ -130,6 +131,7 @@ namespace BMS.Service
                 package.Name = packageB.Name;
                 package.Description = package.Description;
                 package.Price = package.Price;
+                model.Packages.Add(package);
                 models.Add(model);
             }
             return new PagedResult<OrderModel>(pageIndex, pageSize, totalRecord, models);
