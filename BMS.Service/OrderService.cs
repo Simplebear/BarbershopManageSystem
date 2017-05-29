@@ -115,6 +115,8 @@ namespace BMS.Service
                 model = new OrderModel();
                 model.Id = entity.Id;
                 model.BarberId = schedule.Where(o=>o.OrderId == entity.Id).FirstOrDefault().BarberId;
+                model.UserId = Convert.ToInt32(schedule.Where(o => o.OrderId == entity.Id).FirstOrDefault().CustomerId);
+                //model.UserName = Db.User.Where(o => o.Id == model.UserId).FirstOrDefault().Name;
                 model.OrderNo = entity.OrderNo;
                 model.StartTime = schedule.Where(o => o.OrderId == entity.Id).FirstOrDefault().StartTime;
                 model.CreatedOn = entity.CreatedOn;
