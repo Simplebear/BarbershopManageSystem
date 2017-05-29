@@ -28,6 +28,11 @@ namespace BMS.Model
         public int UserId { get; set; }
 
         /// <summary>
+        /// 用户姓名
+        /// </summary>
+        public string UserName { get; set; }
+
+        /// <summary>
         /// 理发师Id
         /// </summary>
         public int BarberId { get; set; }

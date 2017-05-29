@@ -2,6 +2,7 @@
 using BMS.Model;
 using BMS.Utils;
 using Newtonsoft.Json;
+using System.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -81,14 +82,20 @@ namespace BMS.Service
         {
             using (Db = new BMSDBContext())
             {
-                var user = Db.User.Where(o=>o.Id == userModel.Id).FirstOrDefault();
+                var validater = Db.User.FirstOrDefault(o => o.PhoneNumber == userModel.PhoneNumber).Id;
+                //if (validater!=null)
+                //{
+                //    throw new Exception("手机号已存在");
+                //}
+                var user = Db.User.Where(o=>o.Id == validater).FirstOrDefault();
                 user.Name = userModel.Name;
                 user.PhoneNumber = userModel.PhoneNumber;
                 user.Email = userModel.Email;
-                Db.User.Add(user);
+                Db.Entry(user).State = EntityState.Modified;
+                //Db.User.Add(user);
                 Db.SaveChanges();
+                return userModel;
             }
-            return userModel;
         }
 
         /// <summary>
@@ -105,6 +112,7 @@ namespace BMS.Service
                 userModel.Name = user.Name;
                 userModel.PhoneNumber = user.PhoneNumber;
                 userModel.Email = user.Email;
+                userModel.PersonalInfo = user.PresonalInfo;
                 userModel.ImageUrl = user.PhotoUrl;
                 var userRole = Db.UserRole.Where(o => o.UserId == user.Id).FirstOrDefault();
                 var role = Db.Role.Where(o => o.Id == userRole.RoleId).FirstOrDefault();
