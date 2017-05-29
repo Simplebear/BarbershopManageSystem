@@ -1,13 +1,18 @@
 ﻿using BMS.Data;
 using BMS.Data.Entity;
 using BMS.Model;
+using BMS.Utils;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace BMS.Service
 {
@@ -119,6 +124,44 @@ namespace BMS.Service
                 models.Add(model);
             }
             return new PagedResult<ShareModel>(pageIndex, pageSize, totalRecord,models);
+        }
+
+        public string Upload(HttpRequestMessage request, int? Id)
+        {
+            var path = CreateUploadFolder("share");
+            var provider = new FormDataStreamProvider(path);
+            //request.Content.ReadAsStreamAsync().Wait();
+            request.Content.ReadAsMultipartAsync(provider).Wait();
+            var fullpath = string.Empty;
+            for (int i = 0; i < provider.FileData.Count; i++)
+            {
+                fullpath = provider.FileData[i].LocalFileName;            
+            }          
+            return fullpath;
+        }
+        private string CreateUploadFolder(string location)
+        {
+            //string root = HttpContext.Current.Server.MapPath("~/Upload");
+            DateTime dtNow = DateTime.UtcNow;
+            var root = Path.Combine(HttpRuntime.AppDomainAppPath, "App_Data\\" + location);
+            var uploadFolder = string.Concat(root, "\\", "Upload", dtNow.Year.ToString());
+            try
+            {
+                if (!Directory.Exists(uploadFolder))
+                {
+                    Directory.CreateDirectory(uploadFolder);
+                }
+                //else
+                //{
+                //    Directory.Delete(uploadFolder, true);
+                //    Directory.CreateDirectory(uploadFolder);
+                //}
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("CreateUploadFolder");
+            }
+            return uploadFolder;
         }
     }
    

@@ -110,6 +110,8 @@ namespace BMS.Service
             totalRecord = list.Count();
             list = list.OrderByDescending(o => o.CreatedOn).Skip((pageIndex - 1) * pageSize).Take(pageSize);
             var schedule = Db.Schedule.ToList();
+            var packages = Db.Package.ToList();
+            var orderPackage = Db.OrderPackage.ToList();
             foreach (var entity in list)
             {
                 model = new OrderModel();
@@ -118,6 +120,14 @@ namespace BMS.Service
                 model.OrderNo = entity.OrderNo;
                 model.StartTime = schedule.Where(o => o.OrderId == entity.Id).FirstOrDefault().StartTime;
                 model.CreatedOn = entity.CreatedOn;
+                model.Packages = new List<PackageModel>();
+                var package = new PackageModel();
+                var orderPac = orderPackage.Where(o => o.OrderId == model.Id).FirstOrDefault();
+                var packageB = packages.Where(o => o.Id == orderPac.PackageId).FirstOrDefault();
+                package.Id = packageB.Id;
+                package.Name = packageB.Name;
+                package.Description = package.Description;
+                package.Price = package.Price;
                 models.Add(model);
             }
             return new PagedResult<OrderModel>(pageIndex, pageSize, totalRecord, models);

@@ -38,4 +38,10 @@ namespace BMS.Utils.Enum
         Offline
         
     }
+    public enum RoleType
+    {
+        管理员,
+        理发师,
+        顾客
+    }
 }

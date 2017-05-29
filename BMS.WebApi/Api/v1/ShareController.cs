@@ -123,5 +123,18 @@ namespace BMS.WebApi.Api.v1
                 throw new Exception(e.Message);
             }
         }
+
+        [HttpPost, Route(""), AllowAnonymous, ResponseType(typeof(ShareModel))]
+        public IHttpActionResult Upload(int? id)
+        {
+            try
+            {
+                return Ok(shareService.Upload(Request,id));
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
