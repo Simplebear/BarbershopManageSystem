@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -130,14 +131,10 @@ namespace BMS.Service
         public string Upload(HttpRequestMessage request, int? Id)
         {
             var path = CreateUploadFolder("share");
-            var provider = new FormDataStreamProvider(path);
-            //request.Content.ReadAsStreamAsync().Wait();
-            request.Content.ReadAsMultipartAsync(provider).Wait();
-            var fullpath = string.Empty;
-            for (int i = 0; i < provider.FileData.Count; i++)
-            {
-                fullpath = provider.FileData[i].LocalFileName;            
-            }          
+            var text = request.Content.ReadAsStringAsync();
+            string suffix = ".jpg"; //文件的后缀名根据实际情况
+            string fullpath = path + "\\1" + suffix;
+            Base64ToImg(text.Result.Split(',')[1]).Save(fullpath);       
             return fullpath;
         }
         private string CreateUploadFolder(string location)
@@ -163,6 +160,12 @@ namespace BMS.Service
                 Debug.WriteLine("CreateUploadFolder");
             }
             return uploadFolder;
+        }
+        //解析base64编码获取图片
+        private Bitmap Base64ToImg(string base64Code)
+        {
+            MemoryStream stream = new MemoryStream(Convert.FromBase64String(base64Code));
+            return new Bitmap(stream);
         }
     }
    
