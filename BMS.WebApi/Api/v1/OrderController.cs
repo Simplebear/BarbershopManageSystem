@@ -1,5 +1,7 @@
 ﻿using BMS.Model;
 using BMS.Service;
+using BMS.Utils.Enum;
+using BMS.WebApi.filter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,7 +42,7 @@ namespace BMS.WebApi.Api.v1
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        [HttpGet, Route("search"), AllowAnonymous]
+        [HttpGet, Route("search"), AuthValidater(RoleType.理发师)]
         public IHttpActionResult Search(string pageIndex = "1", string pageSize = "10")
         {
             try
