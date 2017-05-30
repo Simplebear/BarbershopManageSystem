@@ -129,8 +129,8 @@ namespace BMS.Service
                 var packageB = packages.Where(o => o.Id == orderPac.PackageId).FirstOrDefault();
                 package.Id = packageB.Id;
                 package.Name = packageB.Name;
-                package.Description = package.Description;
-                package.Price = package.Price;
+                package.Description = packageB.Description;
+                package.Price = packageB.Price;
                 model.Packages.Add(package);
                 models.Add(model);
             }
