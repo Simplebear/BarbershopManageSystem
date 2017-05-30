@@ -21,7 +21,7 @@ namespace BMS.Service
             UserModel userModel = new UserModel();
             using (Db = new BMSDBContext())
             {
-                var user = Db.User.Where(o => o.PhoneNumber == loginModel.Account).FirstOrDefault();
+                var user = Db.User.Where(o => o.PhoneNumber == loginModel.Account||o.Email==loginModel.Account).FirstOrDefault();
                 userModel.Id = user.Id;
                 userModel.Name = user.Name;
                 userModel.PhoneNumber = user.PhoneNumber;
