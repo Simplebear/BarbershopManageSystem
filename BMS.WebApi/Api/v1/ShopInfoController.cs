@@ -1,5 +1,7 @@
 ﻿using BMS.Model;
 using BMS.Service;
+using BMS.Utils.Enum;
+using BMS.WebApi.filter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +27,7 @@ namespace BMS.WebApi.Api.v1
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPut, Route(""), AllowAnonymous, ResponseType(typeof(ShopSettingModel))]
+        [HttpPut, Route(""), AuthValidater(RoleType.管理员), ResponseType(typeof(ShopSettingModel))]
         public IHttpActionResult Put(ShopSettingModel model)
         {
             try

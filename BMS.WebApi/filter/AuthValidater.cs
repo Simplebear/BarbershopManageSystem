@@ -25,7 +25,7 @@ namespace BMS.WebApi.filter
         protected override bool IsAuthorized(HttpActionContext actionContext)
         {
             var token = actionContext.Request.Headers.FirstOrDefault(o => o.Key == "token").Value.FirstOrDefault();
-            var json = EncryptHelper.DecryptString(token, "1qqqwww2");
+            var json = EncryptHelper.DecryptString(token, "1qqqwww3");
             var user = JsonConvert.DeserializeObject<TokenModel>(json);
             Helper.UserId = user.UserId;
             int count = 0;

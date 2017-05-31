@@ -1,5 +1,7 @@
 ﻿using BMS.Model;
 using BMS.Service;
+using BMS.Utils.Enum;
+using BMS.WebApi.filter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +29,7 @@ namespace BMS.WebApi.Api.v1
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPost, Route(""), AllowAnonymous]
+        [HttpPost, Route(""), AuthValidater(RoleType.管理员)]
         public IHttpActionResult Add(PackageModel model)
         {
             try
@@ -44,7 +46,7 @@ namespace BMS.WebApi.Api.v1
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete, Route(""), AllowAnonymous]
+        [HttpDelete, Route(""), AuthValidater(RoleType.管理员)]
         public IHttpActionResult Delete(int id)
         {
             try

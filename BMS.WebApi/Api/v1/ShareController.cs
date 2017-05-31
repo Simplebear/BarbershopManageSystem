@@ -1,5 +1,7 @@
 ﻿using BMS.Model;
 using BMS.Service;
+using BMS.Utils.Enum;
+using BMS.WebApi.filter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -95,12 +97,12 @@ namespace BMS.WebApi.Api.v1
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet, Route("user/all"), AllowAnonymous, ResponseType(typeof(ShareModel))]
-        public IHttpActionResult GetUserAll(int id)
+        [HttpGet, Route("user/all"), AuthValidater(RoleType.顾客), ResponseType(typeof(ShareModel))]
+        public IHttpActionResult GetUserAll()
         {
             try
             {
-                return Ok(shareService.GetUserAll(id));
+                return Ok(shareService.GetUserAll());
             }
             catch (Exception e)
             {

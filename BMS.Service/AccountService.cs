@@ -9,6 +9,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using BMS.Data.Entity;
+using BMS.WebApi.Api.v1;
 
 namespace BMS.Service
 {
@@ -30,6 +32,12 @@ namespace BMS.Service
                 var userRole = Db.UserRole.Where(o => o.UserId == user.Id).FirstOrDefault();
                 var role = Db.Role.Where(o => o.Id == userRole.RoleId).FirstOrDefault();
                 userModel.Role = new IdNameModel() { Id = role.Id, Name = role.Name };
+                //登录历史
+                LoginHistory his = new LoginHistory();
+                his.UserId = user.Id;
+                his.LoginTime = DateTime.Now;
+                Db.LoginHistory.Add(his);
+                Db.SaveChanges();
             }
             var tokenModel = new TokenModel()
             {
@@ -105,12 +113,12 @@ namespace BMS.Service
         /// </summary>
         /// <param name="userModel"></param>
         /// <returns></returns>
-        public UserModel Get(int id)
+        public UserModel Get()
         {
             var userModel = new UserModel();
             using (Db = new BMSDBContext())
             {
-                var user = Db.User.Where(o => o.Id == id).FirstOrDefault();
+                var user = Db.User.Where(o => o.Id == Helper.UserId).FirstOrDefault();
                 userModel.Name = user.Name;
                 userModel.PhoneNumber = user.PhoneNumber;
                 userModel.Email = user.Email;
