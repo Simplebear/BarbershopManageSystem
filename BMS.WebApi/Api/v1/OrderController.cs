@@ -22,9 +22,10 @@ namespace BMS.WebApi.Api.v1
         public OrderController()
         {
             orderService = new OrderService();
+            orderService.UserId = Helper.UserId;
         }
 
-        [HttpPost, Route(""), AllowAnonymous]
+        [HttpPost, Route(""), AuthValidater(RoleType.顾客)]
         public IHttpActionResult Add(OrderModel model)
         {
             try
@@ -42,7 +43,7 @@ namespace BMS.WebApi.Api.v1
         /// <param name="pageIndex"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        [HttpGet, Route("search")/*, AuthValidater(RoleType.理发师, RoleType.管理员)*/]
+        [HttpGet, Route("search"), AuthValidater(RoleType.管理员)]
         public IHttpActionResult Search(string pageIndex = "1", string pageSize = "10")
         {
             try
@@ -60,7 +61,7 @@ namespace BMS.WebApi.Api.v1
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPut, Route(""), AllowAnonymous]
+        [HttpPut, Route(""), AuthValidater(RoleType.管理员,RoleType.理发师)]
         public IHttpActionResult Put(OrderModel model)
         {
             try

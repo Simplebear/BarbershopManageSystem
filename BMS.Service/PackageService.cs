@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BMS.Service
 {
-    public class PackageService
+    public class PackageService:BaseService
     {
         BMSDBContext Db = null;
         public PackageModel Get(int id)

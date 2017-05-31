@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BMS.Service
 {
-    public class OrderService
+    public class OrderService: BaseService
     {
         protected BMSDBContext Db = null;
         /// <summary>

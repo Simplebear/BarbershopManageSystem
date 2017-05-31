@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BMS.Service
 {
-    public class ShopSettingService
+    public class ShopSettingService: BaseService
     {
         BMSDBContext Db = null;
 

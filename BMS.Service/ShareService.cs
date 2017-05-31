@@ -2,6 +2,7 @@
 using BMS.Data.Entity;
 using BMS.Model;
 using BMS.Utils;
+using BMS.WebApi.Api.v1;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -17,7 +18,7 @@ using System.Web;
 
 namespace BMS.Service
 {
-    public class ShareService
+    public class ShareService: BaseService
     {
         BMSDBContext Db = null;
         public ShareModel Get(int id)
@@ -79,12 +80,12 @@ namespace BMS.Service
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public List<ShareModel> GetUserAll(int id)
+        public List<ShareModel> GetUserAll()
         {
             List<ShareModel> models = new List<ShareModel>();
             using (Db = new BMSDBContext())
             {             
-                var entitys = Db.Share.Where(o=>o.UserId == id).ToList().OrderByDescending(o=>o.CreatedOn);
+                var entitys = Db.Share.Where(o=>o.UserId == Helper.UserId).ToList().OrderByDescending(o=>o.CreatedOn);
                 foreach (var item in entitys)
                 {
                     var model = new ShareModel();

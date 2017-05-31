@@ -1,5 +1,7 @@
 ﻿using BMS.Model;
 using BMS.Service;
+using BMS.Utils.Enum;
+using BMS.WebApi.filter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +22,7 @@ namespace BMS.WebApi.Api.v1
         public AccountController()
         {
             accountService = new AccountService();
+            accountService.UserId = Helper.UserId;
         }
        [HttpPost,Route("login"),AllowAnonymous]
         public IHttpActionResult Login(LoginModel loginModel)
@@ -53,7 +56,7 @@ namespace BMS.WebApi.Api.v1
         /// </summary>
         /// <param name="userModel"></param>
         /// <returns></returns>
-        [HttpPut, Route(""), AllowAnonymous]
+        [HttpPut, Route(""),AuthValidater(RoleType.顾客,RoleType.理发师)]
         public IHttpActionResult Update(UserModel userModel)
         {
             try
@@ -71,12 +74,12 @@ namespace BMS.WebApi.Api.v1
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet, Route(""), AllowAnonymous]
-        public IHttpActionResult Get(int id)
+        [HttpGet, Route(""), AuthValidater(RoleType.理发师, RoleType.管理员, RoleType.顾客)]
+        public IHttpActionResult Get()
         {
             try
             {
-                return Ok(accountService.Get(id));
+                return Ok(accountService.Get());
             }
             catch (Exception e)
             {
@@ -106,7 +109,7 @@ namespace BMS.WebApi.Api.v1
          /// </summary>
          /// <param name="barber"></param>
          /// <returns></returns>
-        [HttpPost, Route("barber"), AllowAnonymous]
+        [HttpPost, Route("barber"), AuthValidater(RoleType.管理员)]
         public IHttpActionResult AddBarber(UserModel barber)
         {
             try
@@ -124,7 +127,7 @@ namespace BMS.WebApi.Api.v1
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet, Route("search"), AllowAnonymous, ResponseType(typeof(ShareModel))]
+        [HttpGet, Route("search"), AuthValidater(RoleType.管理员), ResponseType(typeof(ShareModel))]
         public IHttpActionResult Search(string pageIndex = "1", string pageSize = "10")
         {
             try

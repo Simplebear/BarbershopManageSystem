@@ -1,5 +1,7 @@
 ﻿using BMS.Model;
 using BMS.Service;
+using BMS.Utils.Enum;
+using BMS.WebApi.filter;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +22,7 @@ namespace BMS.WebApi.Api.v1
         public AnnouncementController()
         {
             accountService = new AnnouncementService();
+            accountService.UserId = Helper.UserId;
         }
         [HttpGet, Route("all"), AllowAnonymous]
         public IHttpActionResult GetAll()
@@ -34,7 +37,7 @@ namespace BMS.WebApi.Api.v1
             }
 
         }
-        [HttpPost, Route(""), AllowAnonymous]
+        [HttpPost, Route(""), AuthValidater(RoleType.管理员)]
         public IHttpActionResult Add(AnnouncementModel model)
         {
             try
@@ -46,7 +49,7 @@ namespace BMS.WebApi.Api.v1
                 throw new Exception(e.Message);
             }
         }
-        [HttpDelete, Route(""), AllowAnonymous]
+        [HttpDelete, Route(""), AuthValidater(RoleType.管理员)]
         public IHttpActionResult Delete(int id)
         {
             try
@@ -58,7 +61,7 @@ namespace BMS.WebApi.Api.v1
                 throw new Exception(e.Message);
             }
         }
-        [HttpPut, Route(""), AllowAnonymous]
+        [HttpPut, Route(""), AuthValidater(RoleType.管理员)]
         public IHttpActionResult Put(AnnouncementModel model)
         {
             try
@@ -83,7 +86,7 @@ namespace BMS.WebApi.Api.v1
             }
         }
 
-        [HttpGet, Route("search"), AllowAnonymous, ResponseType(typeof(ShareModel))]
+        [HttpGet, Route("search"), AuthValidater(RoleType.管理员), ResponseType(typeof(ShareModel))]
         public IHttpActionResult Search(string pageIndex = "1", string pageSize = "10")
         {
             try

@@ -16,7 +16,7 @@
             <param name="userModel"></param>
             <returns></returns>
         </member>
-        <member name="M:BMS.WebApi.Api.v1.AccountController.Get(System.Int32)">
+        <member name="M:BMS.WebApi.Api.v1.AccountController.Get">
             <summary>
             获取个人信息
             </summary>
@@ -148,7 +148,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:BMS.WebApi.Api.v1.ShareController.GetUserAll(System.Int32)">
+        <member name="M:BMS.WebApi.Api.v1.ShareController.GetUserAll">
             <summary>
             获取个人所有分享
             </summary>
