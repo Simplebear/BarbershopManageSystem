@@ -17,7 +17,7 @@ using System.Web;
 
 namespace BMS.Service
 {
-    public class ShareService
+    public class ShareService: BaseService
     {
         BMSDBContext Db = null;
         public ShareModel Get(int id)

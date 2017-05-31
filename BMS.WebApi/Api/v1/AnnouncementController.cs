@@ -20,6 +20,7 @@ namespace BMS.WebApi.Api.v1
         public AnnouncementController()
         {
             accountService = new AnnouncementService();
+            accountService.UserId = Helper.UserId;
         }
         [HttpGet, Route("all"), AllowAnonymous]
         public IHttpActionResult GetAll()

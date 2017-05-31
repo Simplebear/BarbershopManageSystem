@@ -20,6 +20,7 @@ namespace BMS.WebApi.Api.v1
         public AccountController()
         {
             accountService = new AccountService();
+            accountService.UserId = Helper.UserId;
         }
        [HttpPost,Route("login"),AllowAnonymous]
         public IHttpActionResult Login(LoginModel loginModel)

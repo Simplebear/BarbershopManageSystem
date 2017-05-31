@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BMS.Service
 {
-    public class AnnouncementService
+    public class AnnouncementService: BaseService
     {
         protected BMSDBContext Db = null;
 

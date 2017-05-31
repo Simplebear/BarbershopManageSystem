@@ -17,6 +17,7 @@ namespace BMS.WebApi.Api.v1
         public ShopInfoController()
         {
             shopSettingService = new ShopSettingService();
+            shopSettingService.UserId = Helper.UserId;
         }
 
         /// <summary>

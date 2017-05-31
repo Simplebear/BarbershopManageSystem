@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace BMS.Service
 {
-    public class AccountService
+    public class AccountService: BaseService
     {
         private static readonly string EncryptionKey = "1qqqwww3";
         BMSDBContext Db = null;
@@ -21,7 +21,7 @@ namespace BMS.Service
             UserModel userModel = new UserModel();
             using (Db = new BMSDBContext())
             {
-                var user = Db.User.Where(o => o.PhoneNumber == loginModel.Account).FirstOrDefault();
+                var user = Db.User.Where(o => o.PhoneNumber == loginModel.Account && o.Password == loginModel.Password).FirstOrDefault();
                 userModel.Id = user.Id;
                 userModel.Name = user.Name;
                 userModel.PhoneNumber = user.PhoneNumber;

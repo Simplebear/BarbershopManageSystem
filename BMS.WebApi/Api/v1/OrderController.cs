@@ -22,6 +22,7 @@ namespace BMS.WebApi.Api.v1
         public OrderController()
         {
             orderService = new OrderService();
+            orderService.UserId = Helper.UserId;
         }
 
         [HttpPost, Route(""), AllowAnonymous]

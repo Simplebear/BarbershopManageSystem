@@ -20,6 +20,7 @@ namespace BMS.WebApi.Api.v1
         public PackageController()
         {
             packageService = new PackageService();
+            packageService.UserId = Helper.UserId;
         }
         /// <summary>
         /// 增加套餐

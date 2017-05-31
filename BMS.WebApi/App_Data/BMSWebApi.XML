@@ -162,11 +162,17 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:BMS.WebApi.Api.v1.ShopInfoController.Put(BMS.Model.ShopSettingModel)">
+            <summary>
+            修改店铺信息
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="M:BMS.WebApi.Api.v1.ShopInfoController.Get">
             <summary>
-            获取分享
+            获取店铺信息
             </summary>
-            <param name="id"></param>
             <returns></returns>
         </member>
         <member name="M:BMS.WebApi.Areas.HelpPage.ApiDescriptionExtensions.GetFriendlyId(System.Web.Http.Description.ApiDescription)">

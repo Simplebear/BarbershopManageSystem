@@ -20,6 +20,7 @@ namespace BMS.WebApi.Api.v1
         public ShareController()
         {
             shareService = new ShareService();
+            shareService.UserId = Helper.UserId;
         }
         /// <summary>
         /// 增加分享（顾客）
