@@ -124,6 +124,7 @@ namespace BMS.Service
             {
                 Announcement entity = null;
                 entity = new Announcement();
+                entity = Db.Announcement.Where(o => o.Id == model.Id).FirstOrDefault();
                 entity.Content = model.Content;
                 entity.Title = model.Title;
                 entity.CreatedBy = model.CreatedBy;
