@@ -144,19 +144,21 @@ namespace BMS.Service
 
         public string Upload(HttpRequestMessage request, int? Id)
         {
-            var path = CreateUploadFolder("share");
+            var path = CreateUploadFolder("img");
             var text = request.Content.ReadAsStringAsync();
             string suffix = ".jpg"; //文件的后缀名根据实际情况
-            string fullpath = path + "\\1" + suffix;
-            Base64ToImg(text.Result.Split(',')[1]).Save(fullpath);       
-            return fullpath;
+            var name = Guid.NewGuid().ToString();
+            string fullpath = path + "\\"+ name + suffix;
+            Base64ToImg(text.Result.Split(',')[1]).Save(fullpath); 
+            var returnPath = string.Concat("http://localhost:11162/temp/img/",name,suffix);
+            return returnPath;
         }
         private string CreateUploadFolder(string location)
         {
             //string root = HttpContext.Current.Server.MapPath("~/Upload");
             DateTime dtNow = DateTime.UtcNow;
-            var root = Path.Combine(HttpRuntime.AppDomainAppPath, "App_Data\\" + location);
-            var uploadFolder = string.Concat(root, "\\", "Upload", dtNow.Year.ToString());
+            var root = Path.Combine(HttpRuntime.AppDomainAppPath, "temp\\" + location);
+            var uploadFolder = root;
             try
             {
                 if (!Directory.Exists(uploadFolder))
