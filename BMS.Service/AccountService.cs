@@ -102,6 +102,8 @@ namespace BMS.Service
                 user.Name = userModel.Name;
                 user.PhoneNumber = userModel.PhoneNumber;
                 user.Email = userModel.Email;
+                user.PresonalInfo = userModel.PersonalInfo;
+                user.PhotoUrl = userModel.ImageUrl;
                 Db.Entry(user).State = EntityState.Modified;
                 //Db.User.Add(user);
                 Db.SaveChanges();

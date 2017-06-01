@@ -31,7 +31,7 @@ namespace BMS.WebApi.filter
             int count = 0;
             foreach (var item in _accountBookRoles)
             {
-                if (user.Role != item.ToString())
+                if (user.Role == item.ToString())
                 {
                     count += 1;
                    

@@ -96,7 +96,7 @@ namespace BMS.Service
                     model.Id = item.Id;
                     model.UserId = item.UserId;
                     model.User.Id = item.UserId;
-                    model.User.Name = users.Where(o => o.Id == item.Id).FirstOrDefault().Name;
+                    model.User.Name = users.Where(o => o.Id == item.UserId).FirstOrDefault().Name;
                     model.ImageUrl = item.ImageUrl;
                     model.Content = item.Content;
                     model.CreatedOn = item.CreatedOn;
@@ -133,7 +133,7 @@ namespace BMS.Service
                 model.Id = item.Id;
                 model.UserId = item.UserId;
                 model.User.Id = item.UserId;
-                model.User.Name = users.Where(o => o.Id == item.Id).FirstOrDefault().Name;
+                model.User.Name = users.Where(o => o.Id == item.UserId).FirstOrDefault().Name;
                 model.ImageUrl = item.ImageUrl;
                 model.Content = item.Content;
                 model.CreatedOn = item.CreatedOn;
