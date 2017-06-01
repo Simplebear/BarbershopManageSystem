@@ -8,6 +8,10 @@ namespace BMS.Model
 {
     public class ShareModel
     {
+        public ShareModel()
+        {
+            User = new IdNameModel();
+        }
         /// <summary>
         ///  主键Id
         /// </summary>
@@ -28,6 +32,7 @@ namespace BMS.Model
         /// </summary>
         public int UserId { get; set; }
 
+        public IdNameModel User { get; set; }
         /// <summary>
         /// 创建时间
         /// </summary>
