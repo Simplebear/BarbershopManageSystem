@@ -97,7 +97,7 @@ namespace BMS.WebApi.Api.v1
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet, Route("user/all"), AuthValidater(RoleType.顾客), ResponseType(typeof(ShareModel))]
+        [HttpGet, Route("user/all"), AllowAnonymous]
         public IHttpActionResult GetUserAll()
         {
             try
