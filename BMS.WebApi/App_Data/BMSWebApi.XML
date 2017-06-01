@@ -115,6 +115,13 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:BMS.WebApi.Api.v1.ScheduleController.Add(BMS.Model.LeaveModel)">
+            <summary>
+            请假
+            </summary>
+            <param name="model"></param>
+            <returns></returns>
+        </member>
         <member name="T:BMS.WebApi.Api.v1.ShareController">
             <summary>
             分享
@@ -155,7 +162,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:BMS.WebApi.Api.v1.ShareController.Search(System.String,System.String)">
+        <member name="M:BMS.WebApi.Api.v1.ShareController.Search(System.String,System.String,System.String)">
             <summary>
             获取所有套餐
             </summary>

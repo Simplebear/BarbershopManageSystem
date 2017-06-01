@@ -115,11 +115,11 @@ namespace BMS.WebApi.Api.v1
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet, Route("search"), AllowAnonymous, ResponseType(typeof(ShareModel))]
-        public IHttpActionResult Search(string pageIndex = "1", string pageSize = "10")
+        public IHttpActionResult Search(string keyWord = null,string pageIndex = "1", string pageSize = "10")
         {
             try
             {
-                return Ok(shareService.Search(int.Parse(pageIndex), int.Parse(pageSize)));
+                return Ok(shareService.Search(keyWord,int.Parse(pageIndex), int.Parse(pageSize)));
             }
             catch (Exception e)
             {

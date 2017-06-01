@@ -136,12 +136,16 @@ namespace BMS.Service
             }
         }
 
-        public PagedResult<AnnouncementModel> Search(int pageIndex, int pageSize)
+        public PagedResult<AnnouncementModel> Search(string keyWord,int pageIndex, int pageSize)
         {
             Db = new BMSDBContext();
             AnnouncementModel model = null;
             List<AnnouncementModel> models = new List<AnnouncementModel>();
             Expression<Func<Announcement, bool>> filter = o => true;
+            if (keyWord !=null)
+            {
+                filter = o => true && o.Content.Contains(keyWord);
+            }
             var totalRecord = 0;
             var list = Db.Announcement.Where(filter);
             totalRecord = list.Count();

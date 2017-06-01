@@ -107,11 +107,15 @@ namespace BMS.Service
         /// <param name="pageSize"></param>
         /// <param name="totalRecord"></param>
         /// <returns></returns>
-        public  PagedResult<ShareModel> Search(int pageIndex, int pageSize)
+        public  PagedResult<ShareModel> Search(string keyWord,int pageIndex, int pageSize)
         {
             Db = new BMSDBContext();
             List<ShareModel> models = new List<ShareModel>();
             Expression<Func<Share, bool>> filter = o => true && o.IsDeleted == "N";
+            if (keyWord != null)
+            {
+                filter = o => true && o.Content.Contains(keyWord) && o.IsDeleted == "N";
+            }
             var totalRecord = 0;
             var list = Db.Share.Where(filter);
             totalRecord = list.Count();
