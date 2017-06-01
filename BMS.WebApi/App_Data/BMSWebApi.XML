@@ -164,7 +164,7 @@
         </member>
         <member name="M:BMS.WebApi.Api.v1.ShareController.Search(System.String,System.String,System.String)">
             <summary>
-            获取所有套餐
+            获取所有
             </summary>
             <param name="id"></param>
             <returns></returns>

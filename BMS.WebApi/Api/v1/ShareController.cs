@@ -29,7 +29,7 @@ namespace BMS.WebApi.Api.v1
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPost, Route(""), AllowAnonymous, ResponseType(typeof(ShareModel))]
+        [HttpPost, Route(""), AuthValidater(RoleType.顾客), ResponseType(typeof(ShareModel))]
         public IHttpActionResult Add(ShareModel model)
         {
             try
@@ -46,7 +46,7 @@ namespace BMS.WebApi.Api.v1
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete, Route(""), AllowAnonymous]
+        [HttpDelete, Route(""), AuthValidater(RoleType.顾客)]
         public IHttpActionResult Delete(int id)
         {
             try
@@ -63,7 +63,7 @@ namespace BMS.WebApi.Api.v1
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        [HttpPut, Route(""), AllowAnonymous,ResponseType(typeof(ShareModel))]
+        [HttpPut, Route(""), AuthValidater(RoleType.顾客), ResponseType(typeof(ShareModel))]
         public IHttpActionResult Put(ShareModel model)
         {
             try
@@ -97,7 +97,7 @@ namespace BMS.WebApi.Api.v1
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpGet, Route("user/all"), AllowAnonymous]
+        [HttpGet, Route("user/all"), AuthValidater(RoleType.顾客)]
         public IHttpActionResult GetUserAll()
         {
             try
@@ -110,7 +110,7 @@ namespace BMS.WebApi.Api.v1
             }
         }
         /// <summary>
-        /// 获取所有套餐
+        /// 获取所有
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
