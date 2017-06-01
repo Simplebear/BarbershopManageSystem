@@ -29,6 +29,8 @@ namespace BMS.Service
                 var entity = Db.Share.Where(o => o.Id == id).FirstOrDefault();
                 model.Id = entity.Id;
                 model.UserId = entity.UserId;
+                model.User.Id = entity.UserId;
+                model.User.Name = Db.User.Where(o => o.Id == entity.Id).FirstOrDefault().Name;
                 model.ImageUrl = entity.ImageUrl;
                 model.Content = entity.Content;
                 model.CreatedOn = entity.CreatedOn;
@@ -83,14 +85,18 @@ namespace BMS.Service
         public List<ShareModel> GetUserAll()
         {
             List<ShareModel> models = new List<ShareModel>();
+          
             using (Db = new BMSDBContext())
             {             
                 var entitys = Db.Share.Where(o=>o.UserId == Helper.UserId).ToList().OrderByDescending(o=>o.CreatedOn);
+                var users = Db.User.ToList();
                 foreach (var item in entitys)
                 {
                     var model = new ShareModel();
                     model.Id = item.Id;
                     model.UserId = item.UserId;
+                    model.User.Id = item.UserId;
+                    model.User.Name = users.Where(o => o.Id == item.Id).FirstOrDefault().Name;
                     model.ImageUrl = item.ImageUrl;
                     model.Content = item.Content;
                     model.CreatedOn = item.CreatedOn;
@@ -112,6 +118,7 @@ namespace BMS.Service
             Db = new BMSDBContext();
             List<ShareModel> models = new List<ShareModel>();
             Expression<Func<Share, bool>> filter = o => true && o.IsDeleted == "N";
+            var users = Db.User.ToList();
             if (keyWord != null)
             {
                 filter = o => true && o.Content.Contains(keyWord) && o.IsDeleted == "N";
@@ -125,6 +132,8 @@ namespace BMS.Service
                 var model = new ShareModel();
                 model.Id = item.Id;
                 model.UserId = item.UserId;
+                model.User.Id = item.UserId;
+                model.User.Name = users.Where(o => o.Id == item.Id).FirstOrDefault().Name;
                 model.ImageUrl = item.ImageUrl;
                 model.Content = item.Content;
                 model.CreatedOn = item.CreatedOn;
@@ -154,11 +163,6 @@ namespace BMS.Service
                 {
                     Directory.CreateDirectory(uploadFolder);
                 }
-                //else
-                //{
-                //    Directory.Delete(uploadFolder, true);
-                //    Directory.CreateDirectory(uploadFolder);
-                //}
             }
             catch (Exception ex)
             {
