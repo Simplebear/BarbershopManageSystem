@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnnouncementModel.cs" />
+    <Compile Include="LeaveModel.cs" />
     <Compile Include="LoginModel.cs" />
     <Compile Include="OrderModel.cs" />
     <Compile Include="PackageModel.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegisterModel.cs" />
     <Compile Include="IdNameModel.cs" />
+    <Compile Include="ScheduleModel.cs" />
     <Compile Include="ShareModel.cs" />
     <Compile Include="ShopSettingModel.cs" />
     <Compile Include="TokenModel.cs" />

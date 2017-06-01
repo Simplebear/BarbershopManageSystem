@@ -92,12 +92,12 @@ namespace BMS.Service
         {
             using (Db = new BMSDBContext())
             {
-                var validater = Db.User.FirstOrDefault(o => o.PhoneNumber == userModel.PhoneNumber).Id;
+                //var validater = Db.User.FirstOrDefault(o => o.PhoneNumber == userModel.PhoneNumber).Id;
                 //if (validater!=null)
                 //{
                 //    throw new Exception("手机号已存在");
                 //}
-                var user = Db.User.Where(o=>o.Id == validater).FirstOrDefault();
+                var user = Db.User.Where(o=>o.Id == UserId).FirstOrDefault();
                 user.Name = userModel.Name;
                 user.PhoneNumber = userModel.PhoneNumber;
                 user.Email = userModel.Email;

@@ -236,6 +236,7 @@
     <Compile Include="Api\v1\AnnouncementController.cs" />
     <Compile Include="Api\v1\OrderController.cs" />
     <Compile Include="Api\v1\PackageController.cs" />
+    <Compile Include="Api\v1\ScheduleController.cs" />
     <Compile Include="Api\v1\ShareController.cs" />
     <Compile Include="Api\v1\ShopInfoController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />

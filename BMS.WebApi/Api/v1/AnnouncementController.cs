@@ -87,11 +87,11 @@ namespace BMS.WebApi.Api.v1
         }
 
         [HttpGet, Route("search"), AuthValidater(RoleType.管理员), ResponseType(typeof(ShareModel))]
-        public IHttpActionResult Search(string pageIndex = "1", string pageSize = "10")
+        public IHttpActionResult Search(string keyWord= null, string pageIndex = "1", string pageSize = "10")
         {
             try
             {
-                return Ok(accountService.Search(int.Parse(pageIndex), int.Parse(pageSize)));
+                return Ok(accountService.Search(keyWord,int.Parse(pageIndex), int.Parse(pageSize)));
             }
             catch (Exception e)
             {
