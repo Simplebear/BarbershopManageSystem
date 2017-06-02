@@ -66,7 +66,7 @@ namespace BMS.Service
             {
                 var entity = new Share();
                 entity.Id = model.Id;
-                entity.UserId = model.Id;
+                entity.UserId = UserId;
                 entity.ImageUrl = model.ImageUrl;
                 entity.Content = model.Content;
                 entity.CreatedOn = DateTime.Now.Date;
