@@ -128,7 +128,7 @@ namespace BMS.WebApi.Api.v1
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet, Route("search"), AuthValidater(RoleType.管理员), ResponseType(typeof(ShareModel))]
-        public IHttpActionResult Search(string pageIndex = "1", string pageSize = "10")
+        public IHttpActionResult Search(string pageIndex = "1", string pageSize = "5")
         {
             try
             {
