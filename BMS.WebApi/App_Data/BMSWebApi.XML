@@ -108,7 +108,7 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:BMS.WebApi.Api.v1.PackageController.Search(System.String,System.String)">
+        <member name="M:BMS.WebApi.Api.v1.PackageController.Search(System.String,System.String,System.String)">
             <summary>
             获取所有套餐
             </summary>
