@@ -36,7 +36,7 @@
             <param name="barber"></param>
             <returns></returns>
         </member>
-        <member name="M:BMS.WebApi.Api.v1.AccountController.Search(System.String,System.String)">
+        <member name="M:BMS.WebApi.Api.v1.AccountController.Search(System.String,System.String,System.String)">
             <summary>
             分页获取所有用户
             </summary>

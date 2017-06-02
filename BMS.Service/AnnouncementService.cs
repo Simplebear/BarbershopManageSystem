@@ -159,7 +159,7 @@ namespace BMS.Service
                 model.Title = entity.Title;
                 model.CreatedBy = entity.CreatedBy;
                 model.CreatedOn = entity.CreatedOn;
-                model.CreateUser.Name = users.Where(o => o.Id == entity.Id).FirstOrDefault().Name;
+                model.CreateUser.Name = users.Where(o => o.Id == entity.CreatedBy).FirstOrDefault().Name;
                 model.IsEnable = entity.IsEnable;
                 models.Add(model);
             }
