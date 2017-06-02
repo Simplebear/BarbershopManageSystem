@@ -60,5 +60,21 @@ namespace BMS.Service
             }
             return true;
         }
+        public bool ForBidenSchedule(ForModel model)
+        {
+            using (Db = new BMSDBContext())
+            {
+                var entity = new Schedule()
+                {
+                    BarberId = UserId,
+                    StartTime = model.StartTime,
+                    EndTime = model.EndTime,
+                    CreatedOn = DateTime.Now
+                };
+                Db.Schedule.Add(entity);
+                Db.SaveChanges();
+            }
+            return true;
+        }
     }
 }

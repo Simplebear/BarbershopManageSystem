@@ -38,8 +38,20 @@ namespace BMS.WebApi.Api.v1
                 throw new Exception(e.Message);
             }
         }
+        [HttpPut, Route(""), AuthValidater(RoleType.理发师)]
+        public IHttpActionResult Forbiden(ForModel model)
+        {
+            try
+            {
+                return Ok(scheduleService.ForBidenSchedule(model));
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
         [HttpGet, Route("all"), AuthValidater(RoleType.理发师)]
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult Get()
         {
             try
             {

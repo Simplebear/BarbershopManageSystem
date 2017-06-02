@@ -150,6 +150,7 @@ namespace BMS.Service
             var list = Db.Announcement.Where(filter);
             totalRecord = list.Count();
             list = list.OrderByDescending(o => o.CreatedOn).Skip((pageIndex - 1) * pageSize).Take(pageSize);
+            var users = Db.User.ToList();
             foreach (var entity in list)
             {
                 model = new AnnouncementModel();
@@ -158,6 +159,7 @@ namespace BMS.Service
                 model.Title = entity.Title;
                 model.CreatedBy = entity.CreatedBy;
                 model.CreatedOn = entity.CreatedOn;
+                model.CreateUser.Name = users.Where(o => o.Id == entity.Id).FirstOrDefault().Name;
                 model.IsEnable = entity.IsEnable;
                 models.Add(model);
             }
