@@ -108,11 +108,15 @@ namespace BMS.Service
         /// <param name="pageSize"></param>
         /// <param name="totalRecord"></param>
         /// <returns></returns>
-        public PagedResult<PackageModel> Search(int pageIndex, int pageSize)
+        public PagedResult<PackageModel> Search(string keyWord,int pageIndex, int pageSize)
         {
             Db = new BMSDBContext();
             List<PackageModel> models = new List<PackageModel>();
             Expression<Func<Package, bool>> filter = o => true && o.IsDeleted == "N";
+            if (keyWord != null)
+            {
+                filter = o => true && o.IsDeleted == "N" && (o.Name.Contains(keyWord) || o.Description.Contains(keyWord));
+            }
             var totalRecord = 0;
             var list = Db.Package.Where(filter);
             totalRecord = list.Count();

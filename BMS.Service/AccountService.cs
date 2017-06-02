@@ -185,7 +185,7 @@ namespace BMS.Service
             return Barber;
         }
 
-        public PagedResult<UserModel> Search(int pageIndex, int pageSize)
+        public PagedResult<UserModel> Search(string keyWord,int pageIndex, int pageSize)
         {
             Db = new BMSDBContext();
             var models = new List<UserModel>();
@@ -193,6 +193,10 @@ namespace BMS.Service
             var userRoles = Db.UserRole.ToList();
             var roles = Db.Role.ToList();
             Expression<Func<User, bool>> filter = o => true;
+            if (keyWord != null)
+            {
+                filter = o => true && (o.Name.Contains(keyWord) || o.PresonalInfo.Contains(keyWord));
+            }
             var totalRecord = 0;
             var list = Db.User.Where(filter);
             totalRecord = list.Count();
