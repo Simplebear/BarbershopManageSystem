@@ -38,7 +38,7 @@ namespace BMS.WebApi.Api.v1
                 throw new Exception(e.Message);
             }
         }
-        [HttpPost, Route(""), AuthValidater(RoleType.理发师)]
+        [HttpPost, Route("forbiden"), AuthValidater(RoleType.理发师)]
         public IHttpActionResult Forbiden(ForModel model)
         {
             try
