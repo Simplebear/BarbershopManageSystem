@@ -46,7 +46,7 @@ namespace BMS.WebApi.Api.v1
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete, Route(""), AuthValidater(RoleType.顾客)]
+        [HttpDelete, Route(""), AuthValidater(RoleType.顾客,RoleType.管理员)]
         public IHttpActionResult Delete(int id)
         {
             try
@@ -115,7 +115,7 @@ namespace BMS.WebApi.Api.v1
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet, Route("search"), AllowAnonymous, ResponseType(typeof(ShareModel))]
-        public IHttpActionResult Search(string keyWord = null,string pageIndex = "1", string pageSize = "10")
+        public IHttpActionResult Search(string keyWord = null,string pageIndex = "1", string pageSize = "5")
         {
             try
             {
