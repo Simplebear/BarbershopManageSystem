@@ -118,7 +118,7 @@ namespace BMS.Service
             }
             else if (roleId ==2)
             {
-                var orderIds = schedule.Where(o => o.BarberId == UserId).Select(o => o.OrderId).ToList();
+                var orderIds = schedule.Where(o => o.BarberId == UserId && o.OrderId !=null).Select(o => o.OrderId).ToList();
                 filter = o => true && orderIds.Contains(o.Id);
             }
             else
