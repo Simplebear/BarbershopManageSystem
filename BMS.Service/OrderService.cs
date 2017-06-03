@@ -103,16 +103,32 @@ namespace BMS.Service
         {
             Db = new BMSDBContext();
             OrderModel model = null;
-            List<OrderModel> models = new List<OrderModel>();
-            Expression<Func<Order, bool>> filter = o => true;
-            var totalRecord = 0;
-            var list = Db.Order.Where(filter);
-            totalRecord = list.Count();
-            list = list.OrderByDescending(o => o.CreatedOn).Skip((pageIndex - 1) * pageSize).Take(pageSize);
             var schedule = Db.Schedule.ToList();
             var packages = Db.Package.ToList();
             var orderPackage = Db.OrderPackage.ToList();
             var users = Db.User.ToList();
+            var userRoles = Db.UserRole.ToList();
+            var roleId = userRoles.Where(o => o.UserId == UserId).FirstOrDefault().RoleId;
+          
+            List<OrderModel> models = new List<OrderModel>();
+            Expression<Func<Order, bool>> filter = o => true;
+            if (roleId ==3)
+            {
+                filter = o => true&&o.CustomerId == UserId;
+            }
+            else if (roleId ==2)
+            {
+                var orderIds = schedule.Where(o => o.BarberId == UserId).Select(o => o.OrderId).ToList();
+                filter = o => true && orderIds.Contains(o.Id);
+            }
+            else
+            {
+                filter = o => true;
+            }
+            var totalRecord = 0;
+            var list = Db.Order.Where(filter);
+            totalRecord = list.Count();
+            list = list.OrderByDescending(o => o.CreatedOn).Skip((pageIndex - 1) * pageSize).Take(pageSize);          
             foreach (var entity in list)
             {
                 model = new OrderModel();
