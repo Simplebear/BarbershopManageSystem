@@ -9,21 +9,21 @@ namespace BMS.Utils.Enum
     public enum OrderStatus
     {
         /// <summary>
-        /// 服务中
+        /// 已支付
         /// </summary>
-        serving,
+        Paid,
         /// <summary>
         /// 已关闭
         /// </summary>
-        closed,
+        Closed,
         /// <summary>
         /// 已完成
         /// </summary>
-        complete,
+        Completed,
         /// <summary>
-        /// 已预订
+        /// 未支付
         /// </summary>
-        Ordered
+        NoPay
     }
 
     public enum Chanel
