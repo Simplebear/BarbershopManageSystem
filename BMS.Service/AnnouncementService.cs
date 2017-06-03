@@ -104,7 +104,7 @@ namespace BMS.Service
                 entity = new Announcement();
                 entity.Content = model.Content;
                 entity.Title = model.Title;
-                entity.CreatedBy = model.CreatedBy;
+                entity.CreatedBy = UserId;
                 entity.CreatedOn = DateTime.Now;
                 entity.IsEnable = model.IsEnable;
                 Db.Announcement.Add(entity);
