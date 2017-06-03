@@ -65,7 +65,7 @@ namespace BMS.Service
                     OrderNo = CommonHelper.GetRandomString(6),
                     CreatedBy = orderModel.UserId,
                     CreatedOn = DateTime.Now,
-                    OrderStatus = OrderStatus.Ordered.ToString(),
+                    OrderStatus = orderModel.OrderStatus,
                     Price = orderModel.Packages.Sum(o => o.Price),
                     ChanelCode = orderModel.Chanel.ToString()
                 };
@@ -83,7 +83,7 @@ namespace BMS.Service
                 }
                 var shedul = new Schedule()
                 {
-                    CustomerId = orderModel.UserId,
+                    CustomerId = UserId,
                     BarberId = orderModel.BarberId,
                     OrderId = Db.Order.Where(o => o.OrderNo == orderModel.OrderNo).FirstOrDefault().Id,
                     StartTime = orderModel.StartTime,

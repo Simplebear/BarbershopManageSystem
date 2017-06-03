@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AnnouncementModel.cs" />
+    <Compile Include="ChartModel.cs" />
     <Compile Include="ForModel.cs" />
     <Compile Include="LeaveModel.cs" />
     <Compile Include="LoginModel.cs" />
