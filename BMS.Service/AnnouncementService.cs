@@ -127,8 +127,6 @@ namespace BMS.Service
                 entity = Db.Announcement.Where(o => o.Id == model.Id).FirstOrDefault();
                 entity.Content = model.Content;
                 entity.Title = model.Title;
-                entity.CreatedBy = model.CreatedBy;
-                entity.CreatedOn = DateTime.Now;
                 entity.IsEnable = model.IsEnable;
                 Db.Entry(entity).State = EntityState.Modified;
                 Db.SaveChanges();
