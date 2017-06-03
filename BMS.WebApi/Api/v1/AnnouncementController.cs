@@ -15,7 +15,7 @@ namespace BMS.WebApi.Api.v1
     /// <summary>
     /// 公告
     /// </summary>
-    [RoutePrefix("api/v1/announcement")]
+    [RoutePrefix("api/v1/announcement")]  //路由
     public class AnnouncementController : ApiController
     {
         AnnouncementService accountService = null;
