@@ -60,7 +60,7 @@ namespace BMS.Service
 
                 var order = new Order()
                 {
-                    CustomerId = orderModel.UserId,
+                    CustomerId = UserId,
                     //随机生成
                     OrderNo = CommonHelper.GetRandomString(6),
                     CreatedBy = orderModel.UserId,
