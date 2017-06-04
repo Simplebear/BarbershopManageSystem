@@ -66,6 +66,7 @@ namespace BMS.Service
                 user.Password = registerModel.Password;
                 user.PhoneNumber = registerModel.PhoneNumber;
                 user.Email = registerModel.Email;
+                user.PhotoUrl = "http://localhost:11162/temp/img/08922b70-059a-4d0e-9cac-29c99fe56af5.png";
                 Db.User.Add(user);
                 Db.SaveChanges();              
                 userRole.UserId = Db.User.Where(o=>o.PhoneNumber == user.PhoneNumber).FirstOrDefault().Id;
@@ -172,6 +173,7 @@ namespace BMS.Service
                 entity.PhoneNumber = Barber.PhoneNumber;
                 entity.Email = Barber.Email;
                 entity.PresonalInfo = Barber.PersonalInfo;
+                entity.PhotoUrl = "http://localhost:11162/temp/img/0020b063-09f3-4b27-a7ae-ce19c9d0e8c6.jpg";
                 entity.Password = "123456";
                 Db.User.Add(entity);
                 Db.SaveChanges(); //保存

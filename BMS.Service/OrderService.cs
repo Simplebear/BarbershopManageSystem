@@ -57,17 +57,24 @@ namespace BMS.Service
                         throw new Exception("与理发师时间冲突");
                     }
                 }
-
+                if (orderModel.Chanel.ToString() == "Online")
+                {
+                    orderModel.OrderStatus = "Paid";
+                }
+                else
+                {
+                    orderModel.OrderStatus = "NoPay";
+                }
                 var order = new Order()
                 {
                     CustomerId = UserId,
                     //随机生成
                     OrderNo = CommonHelper.GetRandomString(6),
-                    CreatedBy = orderModel.UserId,
+                    CreatedBy = UserId,
                     CreatedOn = DateTime.Now,
                     OrderStatus = orderModel.OrderStatus,
                     Price = orderModel.Packages.Sum(o => o.Price),
-                    ChanelCode = orderModel.Chanel.ToString()
+                    ChanelCode = orderModel.Chanel.ToString(),                  
                 };
                 orderModel.OrderNo = order.OrderNo;
                 Db.Order.Add(order);
