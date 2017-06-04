@@ -31,6 +31,10 @@ namespace BMS.Service
                 {
                     throw new Exception("所选时间不在营业时间");
                 }
+                if (orderModel.StartTime < DateTime.Now)
+                {
+                    throw new Exception("不能预约之前的时间");
+                }
                 //2.判断是否超过同时服务人数
                 //服务所需分钟数
                 var pacId = Convert.ToInt32(orderModel.Packages[0].Id); 
