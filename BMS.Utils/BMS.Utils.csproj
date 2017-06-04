@@ -63,7 +63,6 @@
     <Compile Include="CommonHelper.cs" />
     <Compile Include="EncryptHelper.cs" />
     <Compile Include="Enum\SysEnum.cs" />
-    <Compile Include="FormDataStreamProvider.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

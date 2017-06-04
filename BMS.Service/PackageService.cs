@@ -129,8 +129,8 @@ namespace BMS.Service
                 model.Price = item.Price;
                 model.Timespan = item.Timespan;
                 model.CreatedOn = item.CreatedOn;
-                model.IsDeleted = item.IsDeleted;
-                model.IsEnable = item.IsEnable;
+                model.IsDeleted = "N";
+                model.IsEnable = "Y";
                 model.Description = item.Description;
                 models.Add(model);
             }
