@@ -46,7 +46,7 @@ namespace BMS.Service
                 Db.Share.Remove(entity);
                 result=Db.SaveChanges();
             }
-            return bool.Parse(result.ToString());
+            return true;
         }
         public ShareModel Update(ShareModel model)
         {
