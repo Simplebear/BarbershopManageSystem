@@ -60,7 +60,7 @@ namespace BMS.Service
 
                 var order = new Order()
                 {
-                    CustomerId = orderModel.UserId,
+                    CustomerId = UserId,
                     //随机生成
                     OrderNo = CommonHelper.GetRandomString(6),
                     CreatedBy = orderModel.UserId,
@@ -134,7 +134,7 @@ namespace BMS.Service
                 model = new OrderModel();
                 model.Id = entity.Id;
                 model.BarberId = schedule.Where(o=>o.OrderId == entity.Id).FirstOrDefault().BarberId;
-                model.UserId = Convert.ToInt32(schedule.Where(o => o.OrderId == entity.Id).FirstOrDefault().CustomerId);
+                model.UserId = entity.CustomerId;
                 model.UserName = users.Where(o => o.Id == model.UserId).FirstOrDefault().Name;
                 model.OrderNo = entity.OrderNo;
                 model.StartTime = schedule.Where(o => o.OrderId == entity.Id).FirstOrDefault().StartTime;
